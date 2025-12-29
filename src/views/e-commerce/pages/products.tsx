@@ -1,8 +1,8 @@
-import { getProducts, getProductsByCategory } from "@/services/fakestoreapi/productService";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Product } from "../types/product";
 import ProductCard from "../components/product-card";
+import { getProducts, getProductsByCategory } from "../../../services/fakestoreapi/productService";
 
 const PRODUCTS_PER_PAGE = 8;
 const mainCategories = ["electronics", "jewelery", "women's clothing", "men's clothing"];

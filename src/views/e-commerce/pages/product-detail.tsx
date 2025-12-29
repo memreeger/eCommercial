@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { Product } from "../types/product";
-import { getProductById } from "@/services/fakestoreapi/productService";
 import { useCart } from "../context/cart-context";
+import { getProductById } from "../../../services/fakestoreapi/productService";
 
 const ProductDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -16,7 +16,7 @@ const ProductDetail: React.FC = () => {
         if (id) {
             setLoading(true);
             getProductById(Number(id))
-                .then(res => setProduct(res.data))
+                .then((res: any) => setProduct(res.data))
                 .finally(() => setLoading(false));
         }
     }, [id]);

@@ -1,5 +1,5 @@
-import type { Product } from "@/views/e-commerce/types/product";
 import axios from "axios";
+import type { Product } from "../../views/e-commerce/types/product";
 
 const BASE_URL = "https://fakestoreapi.com/products";
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "@/services/fakestoreapi/productService";
 import type { Product } from "../types/product";
 import ProductCard from "../components/product-card";
+import { getProducts } from "../../../services/fakestoreapi/productService";
 
 const Home: React.FC = () => {
     const [allProducts, setAllProducts] = useState<Product[]>([]);
@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     useEffect(() => {
         setLoading(true);
         getProducts()
-            .then(res => {
+            .then((res: any) => {
                 setAllProducts(res.data);
                 setVisibleProducts(res.data.slice(0, 8)); // İlk 8 ürün
             })

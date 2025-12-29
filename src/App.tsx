@@ -1,4 +1,3 @@
-import React from 'react'
 import ECommerceApp from './views/e-commerce'
 
 function App() {
