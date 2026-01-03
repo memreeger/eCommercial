@@ -14,6 +14,7 @@ import NotFound from "./pages/404-not-found";
 import Favorites from "./pages/favorites";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import ResetPassword from "./pages/reset-password";
 
 const ECommerceApp: React.FC = () => {
     return (
@@ -36,6 +37,8 @@ const ECommerceApp: React.FC = () => {
                             <Route path="/favorites" element={<Favorites />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/reset-password" element={<ResetPassword />} />
+
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

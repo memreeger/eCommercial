@@ -19,6 +19,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
     const [liked, setLiked] = useState(false);
 
+    
     // Tek state ile tüm mesaj & warning yönettim
     const [notifications, setNotifications] = useState<{
         fav?: string;

@@ -66,7 +66,7 @@ const Products: React.FC = () => {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 capitalize text-center sm:text-left">
-                {category ? category.replace(/-/g, " ") : "All Products"}              {/*/-/ tüm "-" işaretlerini bul.  "g" ise tüm stringte bul demek. */}
+                {category ? category.replace(/-/g, " ") : "All Products"}              {/* /-/ tüm "-" işaretlerini bul.  "g" ise tüm stringte bul demek. */}
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
