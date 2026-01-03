@@ -39,11 +39,13 @@ const Register: React.FC = () => {
 
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center px-4">
-            <form
-                onSubmit={handleRegister}
-                className="w-full max-w-md bg-gray-900 text-white rounded-xl p-8 shadow-lg"
-            >
+        <div
+            className="w-full flex items-center justify-center px-4 bg-gray-200"
+            style={{ minHeight: "calc(100vh - 302px)" }}
+        >  <form
+            onSubmit={handleRegister}
+            className="w-full max-w-md bg-gray-900 text-white rounded-xl p-8 shadow-lg"
+        >
                 <h2 className="text-3xl font-bold mb-6 text-center">Create Account</h2>
                 <input
                     type="text"

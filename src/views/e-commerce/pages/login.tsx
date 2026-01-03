@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../services/firebase/firebase";
 
@@ -25,7 +25,10 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center px-4">
+        <div
+            className="w-full flex items-center justify-center px-4 bg-gray-200"
+            style={{ height: "calc(100vh - 302px)" }}
+        >
             <form
                 onSubmit={handleLogin}
                 className="w-full max-w-md bg-gray-900 text-white rounded-xl p-8 shadow-lg"
@@ -57,6 +60,12 @@ const Login: React.FC = () => {
                 >
                     {loading ? "Logging in..." : "Login"}
                 </button>
+                <div className="mt-4 text-sm text-gray-300">
+                    Already have an account?{" "}
+                    <Link to="/register" className="text-blue-500 hover:underline">
+                        Click to Register
+                    </Link>
+                </div>
             </form>
         </div>
     );

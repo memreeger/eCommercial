@@ -102,7 +102,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 </span>
             )}
             {notifications.cart && (
-                <span className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                <span className="absolute bottom-3 left-3 text-xs bg-black text-white px-2 py-1 rounded">
                     {notifications.cart}
                 </span>
             )}
