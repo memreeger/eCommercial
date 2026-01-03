@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import type { Product } from "../types/product";
 import ProductCard from "../components/product-card";
 import { getProducts } from "../../../services/fakestoreapi/productService";
@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     const [nextIndex, setNextIndex] = useState(8);
     const [searchTerm, setSearchTerm] = useState(""); // search state
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -23,9 +23,9 @@ const Home: React.FC = () => {
             .finally(() => setLoading(false));
     }, []);
 
-    const handleShopNow = () => {
-        navigate("/shop");
-    };
+    // const handleShopNow = () => {
+    //     navigate("/shop");
+    // };
 
     const loadMore = () => {
         const nextProducts = allProducts.slice(nextIndex, nextIndex + 8);
@@ -39,21 +39,21 @@ const Home: React.FC = () => {
     );
 
     return (
-        <div className="flex flex-col pt-10">
-            <section className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-32 px-6 text-center">
+        <div className="flex flex-col">
+            <section className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-10 px-6 text-center">
                 <h1 className="text-5xl font-bold mb-4">Welcome to Our Shop</h1>
                 <p className="text-xl mb-6">
                     Discover high quality products at the best prices. Find your style today!
                 </p>
-                <button
+                {/* <button
                     onClick={handleShopNow}
                     className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition"
                 >
                     Shop Now
-                </button>
+                </button> */}
             </section>
 
-            <section className="max-w-7xl mx-auto px-6 py-16">
+            <section className="max-w-7xl mx-auto px-6 py-10">
                 <h2 className="text-3xl font-bold mb-6 text-center">Featured Products</h2>
 
                 <div className="max-w-md mx-auto mb-8">

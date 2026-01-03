@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import type { Product } from "../types/product";
 import ProductCard from "../components/product-card";
 import { getProducts, getProductsByCategory } from "../../../services/fakestoreapi/productService";
@@ -18,14 +18,16 @@ const categoryMap: Record<string, string> = {
 
 const Products: React.FC = () => {
     const { category } = useParams<{ category?: string }>();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1); // inital olarak 1 verdim
 
     useEffect(() => {
+        const pageParam = parseInt(searchParams.get("page") || "1", 10); // sayıyı 10luk tabana çevirdik
+        setCurrentPage(pageParam);
         setLoading(true);
-        setCurrentPage(1);
 
         const actualCategory = category === "others" ? "others" : category ? categoryMap[category] : undefined;
 
@@ -54,6 +56,11 @@ const Products: React.FC = () => {
     const currentProducts = products.slice(indexOfFirst, indexOfLast);
     const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
 
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        setSearchParams({ page: page.toString() }); // URL'i güncelledik
+    };
+
     if (loading) return <p className="text-center mt-10">Yükleniyor...</p>;
 
     return (
@@ -73,7 +80,7 @@ const Products: React.FC = () => {
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                         <button
                             key={page}
-                            onClick={() => setCurrentPage(page)}
+                            onClick={() => handlePageChange(page)}
                             className={`px-4 py-2 border rounded ${page === currentPage ? "bg-blue-500 text-white" : "bg-white text-gray-800"} hover:bg-blue-500 hover:text-white transition`}
                         >
                             {page}

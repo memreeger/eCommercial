@@ -11,6 +11,7 @@ import Cart from "./pages/cart";
 import Checkout from "./pages/check-out";
 import CreditCardForm from "./pages/credit-card-form";
 import NotFound from "./pages/404-not-found";
+import Favorites from "./pages/favorites";
 
 const ECommerceApp: React.FC = () => {
     return (
@@ -30,6 +31,7 @@ const ECommerceApp: React.FC = () => {
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/checkout/credit-card" element={<CreditCardForm />} />
+                            <Route path="/favorites" element={<Favorites />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

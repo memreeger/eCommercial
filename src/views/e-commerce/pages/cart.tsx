@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../context/cart-context";
+import { useCart } from "../hooks/useCart";
 
 const Cart: React.FC = () => {
-    const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+    const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart    ();
     const navigate = useNavigate();
 
     const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
