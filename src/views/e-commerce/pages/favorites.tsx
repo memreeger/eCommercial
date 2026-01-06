@@ -1,12 +1,12 @@
-import { useContext } from "react";
-import { FavoriteContext } from "../context/favorite-context";
 import ProductCard from "../components/product-card";
 import { Link } from "react-router-dom";
+import { useFavorite } from "../hooks/useFavorite";
 
 const FavoritesPage: React.FC = () => {
-    const favCtx = useContext(FavoriteContext);
+    // const favCtx = useContext(FavoriteContext);
+    const {favorites} = useFavorite();
 
-    if (!favCtx) return <p className="text-center mt-10">Loading...</p>;
+    if (!favorites) return <p className="text-center mt-10">Loading...</p>;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12">
@@ -14,7 +14,7 @@ const FavoritesPage: React.FC = () => {
                 Your Favorites
             </h1>
 
-            {favCtx.favorites.length === 0 ? (
+            {favorites.length === 0 ? (
                 <div
                     className="flex flex-col items-center justify-center text-center"
                     style={{ minHeight: 'calc(100vh - 500px)' }}
@@ -34,7 +34,7 @@ const FavoritesPage: React.FC = () => {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {favCtx.favorites.map((product: any) => (
+                    {favorites.map((product: any) => (
                         <ProductCard key={product.id} product={product} />
                     ))}
                 </div>

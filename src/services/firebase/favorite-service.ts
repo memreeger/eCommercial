@@ -13,6 +13,7 @@ export const addFavorite = async (uid: string, product: Product) => {
     });
 };
 
+
 // FAVORİ SİL
 export const removeFavorite = async (uid: string, productId: number) => {
     const favRef = doc(db, "users", uid, "favorites", productId.toString());
@@ -20,12 +21,15 @@ export const removeFavorite = async (uid: string, productId: number) => {
 };
 
 // FAVORİLERİ GETİR
-export const getFavorites = async (uid: string) => {
+export const getFavorites = async (uid: string): Promise<Product[]> => {
     const favCol = collection(db, "users", uid, "favorites");
     const snapshot = await getDocs(favCol);
 
     return snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
+        id: Number(doc.id),
+        title: doc.data().title ?? "",
+        price: doc.data().price ?? 0,
+        description: doc.data().description ?? "",
+        image: doc.data().image ?? "",
     }));
 };

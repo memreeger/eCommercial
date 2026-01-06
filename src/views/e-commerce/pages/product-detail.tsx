@@ -1,11 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { Product } from "../types/product";
 import { getProductById } from "../../../services/fakestoreapi/productService";
 import { useCart } from "../hooks/useCart";
-import { useAuth } from "../hooks/useAuth";
-import { FavoriteContext } from "../context/favorite-context";
-import { addFavorite, removeFavorite } from "../../../services/firebase/favorite-service";
+import { useFavorite } from "../hooks/useFavorite";
 import { FaHeart } from "react-icons/fa";
 
 const ProductDetail: React.FC = () => {
@@ -15,68 +13,47 @@ const ProductDetail: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     const { addToCart } = useCart();
-    const { user } = useAuth();
-    const favCtx = useContext(FavoriteContext);
+    const { favorites, addFavorite, removeFavorite } = useFavorite();
 
     const [liked, setLiked] = useState(false);
+    const [notifications, setNotifications] = useState<{ fav?: string; cart?: string; favWarning?: string; cartWarning?: string }>({});
 
-    // Notifications state
-    const [notifications, setNotifications] = useState<{
-        fav?: string;
-        favWarning?: string;
-        cart?: string;
-        cartWarning?: string;
-    }>({});
-
+    // Ürün çekme
     useEffect(() => {
-        if (id) {
-            setLoading(true);
-            getProductById(Number(id))
-                .then((res: any) => setProduct(res.data))
-                .finally(() => setLoading(false));
-        }
+        if (!id) return;
+        setLoading(true);
+        getProductById(Number(id))
+            .then(res => setProduct(res.data))
+            .finally(() => setLoading(false));
     }, [id]);
 
+    // Liked state'ini güncelle
     useEffect(() => {
-        if (!favCtx || !user || !product) return;
-
-        const isFavorite = favCtx.favorites.some(
-            (fav: any) => fav.id === product.id.toString()
-        );
-
-        setLiked(isFavorite);
-    }, [favCtx?.favorites, user, product]);
+        if (!product) return;
+        const isFav = favorites.some(f => f.id === product.id);
+        setLiked(isFav);
+    }, [favorites, product]);
 
     const handleAddToCart = () => {
-        if (!user) {
-            setNotifications({ cartWarning: "You need to login to add products" });
-            setTimeout(() => setNotifications({}), 2000);
-            return;
-        }
-
-        if (product) addToCart(product);
+        if (!product) return;
+        addToCart(product);
         setNotifications({ cart: "Product added to cart" });
         setTimeout(() => setNotifications({}), 1500);
     };
 
     const handleFavorite = () => {
-        if (!user || !product) {
-            setNotifications({ favWarning: "You need to login to add favorites" });
-            setTimeout(() => setNotifications({}), 2000);
-            return;
-        }
+        if (!product) return;
 
         if (!liked) {
-            addFavorite(user.uid, product);
+            addFavorite(product);
             setLiked(true);
             setNotifications({ fav: "Added to favorites" });
         } else {
-            removeFavorite(user.uid, product.id);
+            removeFavorite(product.id);
             setLiked(false);
             setNotifications({ fav: "Removed from favorites" });
         }
 
-        favCtx?.refreshFavorites();
         setTimeout(() => setNotifications({}), 1500);
     };
 
@@ -87,14 +64,8 @@ const ProductDetail: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 py-12">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="relative md:w-1/2 flex flex-col items-center">
-                    {/* Product image */}
-                    <img
-                        src={product.image}
-                        alt={product.title}
-                        className="w-full h-80 md:h-96 object-contain"
-                    />
+                    <img src={product.image} alt={product.title} className="w-full h-80 md:h-96 object-contain" />
 
-                    {/* Favorite button */}
                     <button
                         onClick={handleFavorite}
                         className={`absolute top-4 right-4 text-2xl z-10 transform transition-transform duration-300 hover:scale-125 ${liked ? "text-red-500" : "text-gray-400"}`}
@@ -102,19 +73,11 @@ const ProductDetail: React.FC = () => {
                         <FaHeart />
                     </button>
 
-                    {/* Favorite notifications
-                    <div className="mt-2 flex flex-col gap-1">
-                        {notifications.fav && (
-                            <div className="text-green-700 text-sm bg-green-100 px-2 py-1 rounded">
-                                {notifications.fav}
-                            </div>
-                        )}
-                        {notifications.favWarning && (
-                            <div className="text-yellow-700 text-sm bg-yellow-100 px-2 py-1 rounded">
-                                {notifications.favWarning}
-                            </div>
-                        )}
-                    </div> */}
+                    {notifications.fav && (
+                        <div className="mt-2 text-green-700 text-sm bg-green-100 px-2 py-1 rounded">
+                            {notifications.fav}
+                        </div>
+                    )}
                 </div>
 
                 <div className="md:w-1/2 flex flex-col justify-between">
@@ -124,34 +87,7 @@ const ProductDetail: React.FC = () => {
                         <p className="text-2xl font-bold text-blue-500 mb-6">${product.price}</p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mt-4 relative">
-                        {/* Cart notifications */}
-                        <div className="absolute -top-8 left-0 flex flex-col gap-1">
-                            {notifications.cart && (
-                                <div className="text-green-700 text-sm bg-green-100 px-2 py-1 rounded">
-                                    {notifications.cart}
-                                </div>
-                            )}
-                            {notifications.cartWarning && (
-                                <div className="text-yellow-700 text-sm bg-yellow-100 px-2 py-1 rounded">
-                                    {notifications.cartWarning}
-                                </div>
-                            )}
-                        </div>
-                        {/* Favorite notifications */}
-                        <div className="mt-2 flex flex-col gap-1">
-                            {notifications.fav && (
-                                <div className="text-green-700 text-sm bg-green-100 px-2 py-1 rounded">
-                                    {notifications.fav}
-                                </div>
-                            )}
-                            {notifications.favWarning && (
-                                <div className="text-yellow-700 text-sm bg-yellow-100 px-2 py-1 rounded">
-                                    {notifications.favWarning}
-                                </div>
-                            )}
-                        </div>
-
+                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
                         <button
                             onClick={handleAddToCart}
                             className="flex-1 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
@@ -164,6 +100,11 @@ const ProductDetail: React.FC = () => {
                         >
                             ← Go Back
                         </button>
+                        {notifications.cart && (
+                            <div className="text-green-700 text-sm bg-green-100 px-2 py-1 rounded mt-2">
+                                {notifications.cart}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

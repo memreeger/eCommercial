@@ -1,17 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronDown, FaShoppingCart, FaBars, FaTimes, FaHeart } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
-import { FavoriteContext } from "../context/favorite-context";
+import { useFavorite } from "../hooks/useFavorite";
 
 const Navbar: React.FC = () => {
   const { cart } = useCart();
+  const { user, logout } = useAuth();
+  const { favorites } = useFavorite();
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
-  const { user, logout } = useAuth();
-  const favCtx = useContext(FavoriteContext);
+
 
   const handleLinkClick = () => setMenuOpen(false);
   const handleLogout = async () => {
@@ -53,18 +54,44 @@ const Navbar: React.FC = () => {
                 Contact
               </Link>
             </li>
+            <li>
+              <Link
+                to="/favorites"
+                className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
+              >
+                <FaHeart size={20} className={favorites?.length ? "text-red-500" : "text-gray-500"} />
+                {(favorites?.length ?? 0) > 0 && (
+                  <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                    {favorites?.length ?? 0}
+                  </span>
+                )}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/cart"
+                className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
+              >
+                <FaShoppingCart size={20} />
+                {totalItems > 0 && (
+                  <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Link>
+            </li>
 
             {user ? (
               <li className="flex items-center gap-4">
                 {/* Desktop: favoriler ve cart */}
-                <Link
+                {/* <Link
                   to="/favorites"
                   className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
                 >
-                  <FaHeart size={20} className={favCtx?.favorites?.length ? "text-red-500" : "text-gray-500"} />
-                  {(favCtx?.favorites?.length ?? 0) > 0 && (
+                  <FaHeart size={20} className={favorites?.length ? "text-red-500" : "text-gray-500"} />
+                  {(favorites?.length ?? 0) > 0 && (
                     <span className="animate-bounce absolute -top-2 -right-2 bg-yellow-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                      {favCtx?.favorites?.length ?? 0}
+                      {favorites?.length ?? 0}
                     </span>
                   )}
                 </Link>
@@ -79,7 +106,7 @@ const Navbar: React.FC = () => {
                       {totalItems}
                     </span>
                   )}
-                </Link>
+                </Link> */}
 
                 <span className="text-white font-semibold">Hi, {user.displayName || user.email}</span>
                 <button
@@ -112,10 +139,10 @@ const Navbar: React.FC = () => {
               to="/favorites"
               className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
             >
-              <FaHeart size={20} className={favCtx?.favorites?.length ? "text-red-500" : "text-gray-500"} />
-              {(favCtx?.favorites?.length ?? 0) > 0 && (
-                <span className="animate-bounce absolute -top-2 -right-2 bg-yellow-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                  {favCtx?.favorites?.length ?? 0}
+              <FaHeart size={20} className={favorites?.length ? "text-red-500" : "text-gray-500"} />
+              {(favorites?.length ?? 0) > 0 && (
+                <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                  {favorites?.length ?? 0}
                 </span>
               )}
             </Link>
@@ -127,7 +154,7 @@ const Navbar: React.FC = () => {
             >
               <FaShoppingCart size={20} />
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                   {totalItems}
                 </span>
               )}
