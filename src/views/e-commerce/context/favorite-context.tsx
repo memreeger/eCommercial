@@ -37,7 +37,7 @@ export const FavoriteProvider: React.FC<{ children: ReactNode }> = ({ children }
             }
 
             // Login olduysa: önce guest favorilerini Firebase ile sync et
-            const localFavs = getLocalFavorites();
+            const localFavs = getLocalFavorites(); //[1,2,3,]
             const firebaseFavs = await getFavorites(user.uid);
 
             const allFavsMap = new Map<number, Product>();

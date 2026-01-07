@@ -29,7 +29,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const { user } = useAuth();
     const [cart, setCart] = useState<CartItem[]>([]);
 
-    // 🔁 AUTH CHANGE → CART SYNC
     useEffect(() => {
         const loadCart = async () => {
             if (!user) {
@@ -69,7 +68,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         loadCart();
     }, [user]);
 
-    // ➕ ADD
     const addToCart = (product: Product) => {
         setCart(prev => {
             const exists = prev.find(i => i.id === product.id);
@@ -92,7 +90,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         });
     };
 
-    // ➖ REMOVE
     const removeFromCart = (id: number) => {
         setCart(prev => {
             const updated = prev.filter(i => i.id !== id);
