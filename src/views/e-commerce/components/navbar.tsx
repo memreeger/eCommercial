@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
 
           {/* Logo */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-2xl">
-            My E-Commerce
+            NØRA
           </div>
 
           {/* Desktop/Tablet: Menü solda */}
@@ -206,7 +206,7 @@ const Navbar: React.FC = () => {
         <div className="p-6 flex flex-col gap-4 h-full overflow-y-auto">
           {/* Üst logo ve kapatma butonu */}
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-bold text-white">My E-Commerce</h1>
+            <h1 className="text-xl font-bold text-white">NØRA</h1>
             <button
               onClick={() => setMenuOpen(false)}
               className="text-white"
@@ -215,7 +215,7 @@ const Navbar: React.FC = () => {
               <FaTimes size={24} />
             </button>
           </div>
-            <hr className="border-gray-700 " />
+          <hr className="border-gray-700 " />
 
           {/* Menü linkleri */}
 

@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     return (
         <div className="flex flex-col">
             <section className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-10 px-6 text-center">
-                <h1 className="text-5xl font-bold mb-4">Welcome to Our Shop</h1>
+                <h1 className="text-3xl font-bold mb-4">Welcome to NØRA Shop</h1>
                 <p className="text-xl mb-6">
                     Discover high quality products at the best prices. Find your style today!
                 </p>
@@ -56,11 +56,21 @@ const Home: React.FC = () => {
                     <p className="text-center mt-10">Loading...</p>
                 ) : (
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {filteredProducts.map(product => (
-                                <ProductCard key={product.id} product={product} />
-                            ))}
-                        </div>
+                        {filteredProducts.length === 0 ? (
+                            <div className="text-center mt-6 flex flex-col items-center text-gray-500 animate-fadeIn">
+                                <span className="text-3xl mb-4">🔍</span>
+                                <p className="text-lg font-medium">
+                                    We couldn't find any products matching your search.
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {filteredProducts.map(product => (
+                                    <ProductCard key={product.id} product={product} />
+                                ))}
+                            </div>
+                        )}
+
 
                         {filteredProducts.length < allProducts.filter(product =>
                             product.title.toLowerCase().includes(searchTerm.toLowerCase())
