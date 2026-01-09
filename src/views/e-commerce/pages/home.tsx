@@ -6,37 +6,29 @@ import { getProducts } from "../../../services/fakestoreapi/productService";
 
 const Home: React.FC = () => {
     const [allProducts, setAllProducts] = useState<Product[]>([]);
-    const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
+    const [visibleCount, setVisibleCount] = useState(8); // kaç ürün gösteriliyor
     const [loading, setLoading] = useState(true);
-    const [nextIndex, setNextIndex] = useState(8);
-    const [searchTerm, setSearchTerm] = useState(""); // search state
-
-    // const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         setLoading(true);
         getProducts()
             .then((res: any) => {
                 setAllProducts(res.data);
-                setVisibleProducts(res.data.slice(0, 8)); // İlk 8 ürün
             })
             .finally(() => setLoading(false));
     }, []);
 
-    // const handleShopNow = () => {
-    //     navigate("/shop");
-    // };
-
     const loadMore = () => {
-        const nextProducts = allProducts.slice(nextIndex, nextIndex + 8);
-        setVisibleProducts(prev => [...prev, ...nextProducts]);
-        setNextIndex(prev => prev + 8);
+        setVisibleCount(prev => prev + 8);
     };
 
-    // Arama ile filtreleme
-    const filteredProducts = visibleProducts.filter(product =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Arama + Pagination mantığı
+    const filteredProducts = allProducts
+        .filter(product =>
+            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, visibleCount); // sadece visibleCount kadar göster
 
     return (
         <div className="flex flex-col">
@@ -45,12 +37,6 @@ const Home: React.FC = () => {
                 <p className="text-xl mb-6">
                     Discover high quality products at the best prices. Find your style today!
                 </p>
-                {/* <button
-                    onClick={handleShopNow}
-                    className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition"
-                >
-                    Shop Now
-                </button> */}
             </section>
 
             <section className="max-w-7xl mx-auto px-6 py-10">
@@ -76,21 +62,24 @@ const Home: React.FC = () => {
                             ))}
                         </div>
 
-                        {visibleProducts.length < allProducts.length && (
-                            <div className="text-center mt-8">
-                                <button
-                                    onClick={loadMore}
-                                    className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
-                                >
-                                    Load More
-                                </button>
-                            </div>
-                        )}
+                        {filteredProducts.length < allProducts.filter(product =>
+                            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+                        ).length && (
+                                <div className="text-center mt-8">
+                                    <button
+                                        onClick={loadMore}
+                                        className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+                                    >
+                                        Load More
+                                    </button>
+                                </div>
+                            )}
                     </>
                 )}
             </section>
         </div>
     );
 };
+
 
 export default Home;

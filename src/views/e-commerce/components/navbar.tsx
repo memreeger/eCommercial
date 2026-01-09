@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaChevronDown, FaShoppingCart, FaBars, FaTimes, FaHeart } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { FaShoppingCart, FaBars, FaTimes, FaHeart, FaUser } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { useFavorite } from "../hooks/useFavorite";
@@ -9,17 +9,24 @@ const Navbar: React.FC = () => {
   const { cart } = useCart();
   const { user, logout } = useAuth();
   const { favorites } = useFavorite();
-  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
 
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const favoriteCount = favorites?.length ?? 0;
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+  }, [menuOpen]);
 
   const handleLinkClick = () => setMenuOpen(false);
+
   const handleLogout = async () => {
     await logout();
+    setProfileOpen(false);
     setMenuOpen(false);
   };
-  const toggleShop = () => setShopOpen(prev => !prev);
 
   const shopItems = [
     { label: "All Products", to: "/shop" },
@@ -30,236 +37,227 @@ const Navbar: React.FC = () => {
     { label: "Others", to: "/shop/category/others" },
   ];
 
+  const navClass = ({ isActive }: { isActive: boolean }) =>
+    isActive ? "text-blue-400 font-semibold" : "hover:text-blue-400 transition-colors";
+
   return (
-    <nav className="w-full border-b bg-gray-900 text-gray-200">
+    <nav className="w-full bg-gray-900 text-gray-200 border-b border-gray-700">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Üst Satır */}
+        {/* Üst satır */}
         <div className="h-16 flex items-center justify-between relative">
-          <h1 className="text-2xl font-bold text-white">My E-Commerce</h1>
+          {/* Hamburger (mobil) */}
+          <button
+            className="sm:hidden text-white z-50"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <FaBars size={24} />
+          </button>
 
-          {/* Desktop üst menü */}
-          <ul className="hidden sm:flex items-center gap-6">
-            <li>
-              <Link onClick={handleLinkClick} to="/" className="hover:text-blue-400 transition-colors">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link onClick={handleLinkClick} to="/about" className="hover:text-blue-400 transition-colors">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link onClick={handleLinkClick} to="/contact" className="hover:text-blue-400 transition-colors">
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/favorites"
-                className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
-              >
-                <FaHeart size={20} className={favorites?.length ? "text-red-500" : "text-gray-500"} />
-                {(favorites?.length ?? 0) > 0 && (
-                  <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                    {favorites?.length ?? 0}
-                  </span>
-                )}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/cart"
-                className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
-              >
-                <FaShoppingCart size={20} />
-                {totalItems > 0 && (
-                  <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </Link>
-            </li>
+          {/* Logo */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-2xl">
+            My E-Commerce
+          </div>
 
-            {user ? (
-              <li className="flex items-center gap-4">
-                {/* Desktop: favoriler ve cart */}
-                {/* <Link
-                  to="/favorites"
-                  className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
-                >
-                  <FaHeart size={20} className={favorites?.length ? "text-red-500" : "text-gray-500"} />
-                  {(favorites?.length ?? 0) > 0 && (
-                    <span className="animate-bounce absolute -top-2 -right-2 bg-yellow-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                      {favorites?.length ?? 0}
-                    </span>
-                  )}
-                </Link>
-
-                <Link
-                  to="/cart"
-                  className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
-                >
-                  <FaShoppingCart size={20} />
-                  {totalItems > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                      {totalItems}
-                    </span>
-                  )}
-                </Link> */}
-
-                <span className="text-white font-semibold">Hi, {user.displayName || user.email}</span>
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
-                >
-                  Logout
-                </button>
-              </li>
-            ) : (
-              <>
-                <li>
-                  <Link onClick={handleLinkClick} to="/login" className="hover:text-blue-400 transition-colors">
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link onClick={handleLinkClick} to="/register" className="hover:text-blue-400 transition-colors">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
+          {/* Desktop/Tablet: Menü solda */}
+          <ul className="hidden sm:flex items-center gap-6 flex-1">
+            <li><NavLink to="/" className={navClass}>Home</NavLink></li>
+            <li><NavLink to="/about" className={navClass}>About</NavLink></li>
+            <li><NavLink to="/contact" className={navClass}>Contact</NavLink></li>
           </ul>
 
-          {/* Mobil: hamburger menü + ikonlar */}
-          <div className="flex sm:hidden items-center gap-4">
-            {/* Favoriler */}
-            <Link
-              to="/favorites"
-              className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
-            >
-              <FaHeart size={20} className={favorites?.length ? "text-red-500" : "text-gray-500"} />
-              {(favorites?.length ?? 0) > 0 && (
-                <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                  {favorites?.length ?? 0}
+          {/* Desktop/Tablet: İkonlar sağda */}
+          <div className="hidden sm:flex items-center gap-4 flex-1 justify-end">
+            <NavLink to="/favorites" className="relative">
+              <FaHeart size={20} className={favoriteCount ? "text-red-500" : "text-gray-500"} />
+              {favoriteCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center animate-bounce">
+                  {favoriteCount}
                 </span>
               )}
-            </Link>
+            </NavLink>
 
-            {/* Cart */}
-            <Link
-              to="/cart"
-              className="hover:text-blue-400 transition-colors flex items-center gap-1 relative"
-            >
+            <NavLink to="/cart" className="relative">
               <FaShoppingCart size={20} />
               {totalItems > 0 && (
-                <span className="animate-bounce absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center animate-bounce">
                   {totalItems}
                 </span>
               )}
-            </Link>
+            </NavLink>
 
-            {/* Hamburger menü */}
+            {/* Profil dropdown desktop */}
+            <div className="relative">
+              <button
+                onClick={() => setProfileOpen(prev => !prev)}
+                className="flex items-center gap-4 px-1 rounded cursor-pointer"
+              >
+                <FaUser size={20} />
+              </button>
+
+              {profileOpen && (
+                <div className="absolute right-0 mt-2 w-44 bg-gray-800 rounded shadow-md p-2 flex flex-col gap-1 z-50">
+                  {user ? (
+                    <>
+                      <span className="truncate">{user.displayName || user.email}</span>
+                      <button
+                        onClick={handleLogout}
+                        className="bg-red-500 hover:bg-red-600 px-2 py-1 rounded text-sm"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <NavLink onClick={() => setProfileOpen(false)} to="/login" className={navClass}>Login</NavLink>
+                      <NavLink onClick={() => setProfileOpen(false)} to="/register" className={navClass}>Register</NavLink>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Mobil: ikonlar sağda */}
+          <div className="sm:hidden flex items-center gap-4 ml-auto z-50 relative">
+            <NavLink to="/favorites" className="relative">
+              <FaHeart size={20} className={favoriteCount ? "text-red-500" : "text-gray-500"} />
+              {favoriteCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center animate-bounce">
+                  {favoriteCount}
+                </span>
+              )}
+            </NavLink>
+
+            <NavLink to="/cart" className="relative">
+              <FaShoppingCart size={20} />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center animate-bounce">
+                  {totalItems}
+                </span>
+              )}
+            </NavLink>
+
+            {/* Profil ikon mobil */}
             <button
-              className="text-white focus:outline-none z-50"
-              onClick={() => setMenuOpen(prev => !prev)}
-              aria-label="Toggle menu"
+              onClick={() => setProfileOpen(prev => !prev)}
+              className="relative"
+              aria-label="Profile menu"
             >
-              {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              <FaUser size={20} />
             </button>
+
+            {/* Profil dropdown mobil */}
+            {profileOpen && (
+              <div className="absolute right-0 top-10 bg-gray-800 text-white rounded shadow-md w-40 p-2 flex flex-col gap-1 z-50">
+                {user ? (
+                  <>
+                    <span className="font-medium truncate">{user.displayName || user.email}</span>
+                    <button
+                      onClick={handleLogout}
+                      className="bg-red-500 hover:bg-red-600 px-2 py-1 rounded text-sm"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <NavLink onClick={() => setProfileOpen(false)} to="/login" className={navClass}>Login</NavLink>
+                    <NavLink onClick={() => setProfileOpen(false)} to="/register" className={navClass}>Register</NavLink>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Mobil: hamburger menü açılınca gözükecek */}
-        {menuOpen && (
-          <ul className="flex flex-col sm:hidden gap-4 py-2 px-6 bg-gray-800">
-            <li>
-              <Link onClick={handleLinkClick} to="/" className="hover:text-blue-400 transition-colors">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link onClick={handleLinkClick} to="/about" className="hover:text-blue-400 transition-colors">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link onClick={handleLinkClick} to="/contact" className="hover:text-blue-400 transition-colors">
-                Contact
-              </Link>
-            </li>
-            {user ? (
-              <li className="flex items-center gap-2">
-                <span className="text-white font-semibold">
-                  Hi, {user.displayName || user.email}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
-                >
-                  Logout
-                </button>
-              </li>
-            ) : (
-              <>
-                <li>
-                  <Link onClick={handleLinkClick} to="/login" className="hover:text-blue-400 transition-colors">
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link onClick={handleLinkClick} to="/register" className="hover:text-blue-400 transition-colors">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        )}
-
-        {/* Alt Satır: Shop Menüsü */}
+        {/* Alt satır: Shop kategorileri */}
         <div className="border-t border-gray-700">
-          <ul className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 py-2 px-6">
-            {/* Mobil: toggle */}
-            <li className="sm:hidden relative w-full">
-              <button
-                onClick={toggleShop}
-                className="flex items-center justify-between w-full hover:text-blue-400 transition-colors py-1"
-              >
-                Shop <FaChevronDown className="text-sm mt-1" />
-              </button>
-
-              {shopOpen && (
-                <ul className="flex flex-col mt-2 w-full bg-gray-900 text-gray-200 shadow-lg rounded z-50">
-                  {shopItems.map(item => (
-                    <li key={item.to}>
-                      <Link
-                        onClick={handleLinkClick}
-                        to={item.to}
-                        className="px-4 py-2 rounded block hover:bg-blue-600 hover:text-white transition-colors duration-200"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-
-            {/* Desktop: tüm Shop linkleri direkt */}
+          <ul className="hidden sm:flex items-center gap-6 py-2 px-6">
             {shopItems.map(item => (
-              <li key={item.to} className="hidden sm:block">
-                <Link
-                  onClick={handleLinkClick}
+              <li key={item.to}>
+                <NavLink
                   to={item.to}
-                  className="hover:text-blue-400 transition-colors py-1"
+                  className={navClass}
+                  end={item.to === "/shop"}
                 >
                   {item.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      {/* Overlay */}
+      <div
+        onClick={() => setMenuOpen(false)}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity sm:hidden
+        ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      />
+
+      {/* Mobil soldan açılan menü */}
+      {/* Mobil soldan açılan menü */}
+      <div
+        className={`fixed top-0 left-0 h-full w-87 bg-gray-900 z-50
+  transform transition-transform duration-300 sm:hidden
+  ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <div className="p-6 flex flex-col gap-4 h-full overflow-y-auto">
+          {/* Üst logo ve kapatma butonu */}
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl font-bold text-white">My E-Commerce</h1>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="text-white"
+              aria-label="Close menu"
+            >
+              <FaTimes size={24} />
+            </button>
+          </div>
+            <hr className="border-gray-700 " />
+
+          {/* Menü linkleri */}
+
+          <span className="text-sm text-gray-400">Shop</span>
+          <div className="ml-2 flex flex-col gap-2">
+            {shopItems.map(item => (
+              <NavLink
+                key={item.to}
+                onClick={handleLinkClick}
+                to={item.to}
+                className={navClass}
+                end={item.to === "/shop"}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+
+          <hr className="border-gray-700" />
+
+          <NavLink onClick={handleLinkClick} to="/" className={navClass}>Home</NavLink>
+          <NavLink onClick={handleLinkClick} to="/about" className={navClass}>About</NavLink>
+          <NavLink onClick={handleLinkClick} to="/contact" className={navClass}>Contact</NavLink>
+
+          <hr className="border-gray-700" />
+
+          {/* Mobil menü içi profil/login/logout */}
+          <h4> {user?.displayName}</h4>
+          {user ? (
+
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition mt-2"
+            >
+              Logout
+            </button>
+          ) : (
+            <div className="flex flex-col gap-2 mt-2">
+              <NavLink onClick={handleLinkClick} to="/login" className={navClass}>Login</NavLink>
+              <NavLink onClick={handleLinkClick} to="/register" className={navClass}>Register</NavLink>
+            </div>
+          )}
         </div>
       </div>
     </nav>
