@@ -23,13 +23,13 @@ const Contact: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-6 py-12">
-            <h1 className="text-4xl font-bold text-center mb-6">Contact Us</h1>
-            <p className="text-center text-gray-600 mb-12">
+            <h1 className="text-4xl font-bold text-center mb- dark:text-white">Contact Us</h1>
+            <p className="text-center text-gray-600 mb-12 dark:text-gray-400">
                 Send us a message and we’ll get back to you as soon as possible.
             </p>
 
             {submitted && (
-                <p className="text-green-500 text-center mb-6 font-semibold">
+                <p className="text-green-500 text-center mb-6 font-semibold dark:text-gray-500">
                     Thank you! Your message has been sent.
                 </p>
             )}
@@ -45,7 +45,8 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="col-span-2 sm:col-span-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="col-span-2 sm:col-span-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500
+                    dark:bg-gray-200 dark:text-black dark:focus:ring-2 dark:focus:ring-blue-500 dark:placeholder-gray-700"
                 />
                 <input
                     type="email"
@@ -54,7 +55,8 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="col-span-2 sm:col-span-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="col-span-2 sm:col-span-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500
+                    dark:bg-gray-200 dark:text-black dark:focus:ring-2 dark:focus:ring-blue-500 dark:placeholder-gray-700"
                 />
                 <input
                     type="text"
@@ -62,7 +64,8 @@ const Contact: React.FC = () => {
                     placeholder="Subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="col-span-2 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="col-span-2 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500
+                    dark:bg-gray-200 dark:text-black dark:focus:ring-2 dark:focus:ring-blue-500 dark:placeholder-gray-700"
                 />
                 <textarea
                     name="message"
@@ -71,18 +74,20 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="col-span-2 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="col-span-2 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none
+                    dark:bg-gray-200 dark:text-black dark:focus:ring-2 dark:focus:ring-blue-500 dark:placeholder-gray-700"
                 ></textarea>
 
                 <button
                     type="submit"
-                    className="col-span-2 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition"
+                    className="col-span-2 bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition
+                    dark:bg-blue-500 dark:hover:bg-blue-600"
                 >
                     Send Message
                 </button>
             </form>
 
-            <div className="mt-12 text-center text-gray-600 space-y-2">
+            <div className="mt-12 text-center text-gray-600 space-y-2 dark:text-gray-500">
                 <p>Email: contact@myEcommerceshop.com</p>
                 <p>Phone: +90 500 00 00</p>
                 <p>Address: 123 Commerce Street, Commerce City</p>

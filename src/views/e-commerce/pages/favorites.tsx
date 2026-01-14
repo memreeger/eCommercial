@@ -6,11 +6,12 @@ const FavoritesPage: React.FC = () => {
     // const favCtx = useContext(FavoriteContext);
     const {favorites} = useFavorite();
 
-    if (!favorites) return <p className="text-center mt-10">Loading...</p>;
+    if (!favorites) return <p className="text-center mt-10 dark:bg-black dark:text-white">Loading...</p>;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-8 text-center">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-8 text-center
+            dark:bg-black dark:text-white">
                 Your Favorites
             </h1>
 
@@ -19,15 +20,18 @@ const FavoritesPage: React.FC = () => {
                     className="flex flex-col items-center justify-center text-center"
                     style={{ minHeight: 'calc(100vh - 500px)' }}
                 >
-                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-700 mb-4">
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-700 mb-4
+                    dark:bg-black dark:text-white">
                         You haven't added any favorites yet
                     </h2>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-gray-600 mb-6
+                    dark:bg-black dark:text-white">
                         Browse our products and add your favorites to see them here.
                     </p>
                     <Link
                         to="/shop"
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md font-medium transition"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md font-medium transition
+                        dark:bg-orange-500 dark:hover:bg-orange-600"
                     >
                         Go to Shop
                     </Link>

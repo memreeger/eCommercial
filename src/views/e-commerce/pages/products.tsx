@@ -24,7 +24,7 @@ const categoryMap: Record<string, string> = {
     "mens-clothing": "men's clothing",
 };
 
-type SortType = "price-asc" | "price-desc" | "";
+type SortType = "price-asc" | "price-desc";
 
 const Products: React.FC = () => {
     const { category } = useParams<{ category?: string }>();
@@ -32,10 +32,10 @@ const Products: React.FC = () => {
 
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1); // direkt 1. sayfa için
 
     useEffect(() => {
-        const pageParam = parseInt(searchParams.get("page") || "1", 10);
+        const pageParam = parseInt(searchParams.get("page") || "1", 10); // 10luk tabana çevirmek için
         const sortParam = (searchParams.get("sort") || "") as SortType;
 
         setCurrentPage(pageParam);
@@ -82,7 +82,7 @@ const Products: React.FC = () => {
             .finally(() => setLoading(false));
     }, [category, searchParams]);
 
-    // Pagination
+    // Pagination & Sayfalama işlemleri
     const indexOfLast = currentPage * PRODUCTS_PER_PAGE;
     const indexOfFirst = indexOfLast - PRODUCTS_PER_PAGE;
     const currentProducts = products.slice(indexOfFirst, indexOfLast);
@@ -97,7 +97,7 @@ const Products: React.FC = () => {
     };
 
     if (loading) {
-        return <p className="text-center mt-10">Yükleniyor...</p>;
+        return <p className="text-center mt-10">Loading...</p>;
     }
 
     return (
@@ -107,7 +107,7 @@ const Products: React.FC = () => {
                     {category ? category.replace(/-/g, " ") : "All Products"}
                 </h2>
 
-                {/* SORT */}
+                {/* SORTING ALGORITMA */}
                 <select
                     value={searchParams.get("sort") || ""}
                     onChange={(e) => {
@@ -116,9 +116,9 @@ const Products: React.FC = () => {
                             sort: e.target.value,
                         });
                     }}
-                    className="border px-4 py-2 rounded"
+                    className="border px-4 py-2 rounded dark:bg-black dark:text-white"
                 >
-                    <option value="">Sort by: Default </option>
+                    <option>Select To Sort</option>
                     <option value="price-asc">
                         Price : Low to High
                     </option>
@@ -143,10 +143,12 @@ const Products: React.FC = () => {
                         <button
                             key={page}
                             onClick={() => handlePageChange(page)}
-                            className={`px-4 py-2 border rounded ${page === currentPage
-                                ? "bg-blue-500 text-white"
-                                : "bg-white text-gray-800"
-                                } hover:bg-blue-500 hover:text-white transition`}
+                            className={`
+                                
+                                px-4 py-2 border rounded  ${page === currentPage
+                                    ? "bg-blue-500 text-white dark:bg-orange-500 dark:text-black"
+                                    : "bg-white text-gray-800 dark:bg-"
+                                } hover:bg-blue-500 hover:text-white transition dark:hover:bg-orange-600`}
                         >
                             {page}
                         </button>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
+import { useCurrency } from "../hooks/useCurrency";
 
 const Checkout: React.FC = () => {
     const { cart, clearCart } = useCart();
@@ -10,6 +11,7 @@ const Checkout: React.FC = () => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("card");
+    const { currency, convertPrice } = useCurrency();
 
     const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -35,7 +37,7 @@ const Checkout: React.FC = () => {
                 </button>
             </div>
         );
-
+    // {convertPrice(product.price)} {currency}
     return (
         <div className="max-w-5xl mx-auto px-4 py-12">
             <h2 className="text-3xl font-bold mb-8 text-center md:text-left">Checkout</h2>
@@ -46,12 +48,12 @@ const Checkout: React.FC = () => {
                     {cart.map(item => (
                         <div key={item.id} className="flex justify-between mb-2">
                             <span className="truncate">{item.title} x {item.quantity}</span>
-                            <span>${(item.price * item.quantity).toFixed(2)}</span>
+                            <span>{(convertPrice(item.price) * item.quantity).toFixed(2)} {currency}</span>
                         </div>
                     ))}
                     <div className="border-t mt-4 pt-2 flex justify-between font-bold">
                         <span>Total</span>
-                        <span>${totalPrice.toFixed(2)}</span>
+                        <span>{convertPrice(totalPrice).toFixed(2)} {currency}</span>
                     </div>
                 </div>
 
@@ -62,7 +64,9 @@ const Checkout: React.FC = () => {
                         value={name}
                         onChange={e => setName(e.target.value)}
                         required
-                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-500
+                        dark:bg-white dark:placeholder-gray-500 
+                        dark:focus:ring-2 dark:focus:ring-blue-500"
                     />
                     <input
                         type="email"
@@ -70,29 +74,37 @@ const Checkout: React.FC = () => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         required
-                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-500
+                        dark:bg-white dark:placeholder-gray-500 
+                        dark:focus:ring-2 dark:focus:ring-blue-500"
                     />
                     <textarea
                         placeholder="Address"
                         value={address}
                         onChange={e => setAddress(e.target.value)}
                         required
-                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none
+                        dark:bg-white dark:placeholder-gray-500 
+                        dark:focus:ring-2 dark:focus:ring-blue-500"
                         rows={4}
                     />
                     <select
                         value={paymentMethod}
                         onChange={e => setPaymentMethod(e.target.value)}
-                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-500
+                        dark:bg-white dark:placeholder-gray-500 
+                        dark:focus:ring-2 dark:focus:ring-blue-500"
                     >
                         <option value="card">Credit Card</option>
                         <option value="cash">Cash on Delivery</option>
+                        <option value="EFT"> EFT/FAST</option>
                     </select>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition mt-2"
+                        className="w-full bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition mt-2
+                        dark:bg-blue-500 dark:hover:bg-blue-600"
                     >
-                        Pay ${totalPrice.toFixed(2)}
+                        Pay ${convertPrice(totalPrice).toFixed(2)} {currency}
                     </button>
                 </form>
             </div>

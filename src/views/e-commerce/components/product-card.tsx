@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Product } from "../types/product";
 import { useFavorite } from "../hooks/useFavorite";
 import { useCart } from "../hooks/useCart";
+import { useCurrency } from "../hooks/useCurrency";
 
 interface Props {
     product: Product;
@@ -13,6 +14,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     const navigate = useNavigate();
     const { addToCart } = useCart();
     const { addFavorite, removeFavorite, isFavorite } = useFavorite();
+    const { currency, convertPrice } = useCurrency();
 
     const [notifications, setNotifications] = useState<{ fav?: string; cart?: string }>({});
 
@@ -40,7 +42,8 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     return (
         <div
             onClick={() => navigate(`/shop/product/${product.id}`)}
-            className="relative border rounded-lg p-4 cursor-pointer hover:shadow-lg transition flex flex-col justify-between"
+            className="relative border rounded-lg p-4 cursor-pointer hover:shadow-lg transition flex flex-col justify-between
+            dark:bg-gray-200"
         >
             <button
                 onClick={handleFavorite}
@@ -67,13 +70,14 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 className="w-full h-56 sm:h-48 md:h-40 lg:h-48 object-contain mb-4"
             />
             <div className="flex-1 flex flex-col justify-between">
-                <h3 className="font-semibold mb-2 text-sm sm:text-base md:text-lg">{product.title}</h3>
-                <p className="text-blue-500 font-bold text-lg mt-2">${product.price}</p>
+                <h3 className="font-semibold mb-2 text-sm sm:text-base md:text-lg dark:text-black">{product.title}</h3>
+                <p className="text-blue-500 font-bold text-lg mt-2 dark:text-orange-500">{convertPrice(product.price).toFixed(2)} {currency}</p>
             </div>
 
             <button
                 onClick={handleAddToCart}
-                className="mt-4 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+                className="mt-4 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition 
+                dark:bg-blue-500 dark:hover:bg-blue-600"
             >
                 Add to Cart
             </button>

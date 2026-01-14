@@ -1,94 +1,164 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../../services/firebase/firebase";
-import { updateProfile } from "firebase/auth";
+
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "../../../components/ui/form";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
+
+import {
+    registerSchema,
+    type RegisterFormValues,
+} from "../schemas/register-scheme";
 
 const Register: React.FC = () => {
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-    });
-
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    const form = useForm<RegisterFormValues>({
+        resolver: zodResolver(registerSchema),
+        defaultValues: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+        },
+        mode: "onChange",
+    });
 
-    const handleRegister = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        const { firstName, lastName, email, password } = formData;
-
+    const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                data.email,
+                data.password
+            );
 
             await updateProfile(userCredential.user, {
-                displayName: `${firstName} ${lastName}`
+                displayName: `${data.firstName} ${data.lastName}`,
             });
 
-            navigate("/"); // kayıt başarılıysa ana sayfaya git
+            navigate("/");
         } catch (error) {
             console.error(error);
-            alert("Kayıt sırasında bir hata oluştu.");
-        } finally {
-            setLoading(false);
+            alert("An error occurred during registration.");
         }
     };
 
-
     return (
         <div
-            className="w-full flex items-center justify-center px-4 bg-gray-200"
+            className="w-full flex items-center justify-center px-4 bg-gray-200 
+            dark:bg-black"
             style={{ minHeight: "calc(100vh - 302px)" }}
-        >  <form
-            onSubmit={handleRegister}
-            className="w-full max-w-md bg-gray-900 text-white rounded-xl p-8 shadow-lg"
         >
-                <h2 className="text-3xl font-bold mb-6 text-center">Create Account</h2>
-                <input
-                    type="text"
-                    placeholder="Enter a your first name"
-                    className="w-full p-3 mb-4 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Enter a your last name"
-                    className="w-full p-3 mb-4 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full p-3 mb-4 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                />
-
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="w-full p-3 mb-4 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    required
-                />
-
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded font-semibold transition disabled:opacity-50"
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="w-full max-w-md bg-gray-900 text-white rounded-xl p-8 shadow-lg space-y-6"
                 >
-                    {loading ? "Registering..." : "Register"}
-                </button>
-            </form>
+                    <h2 className="text-3xl font-bold text-center">Create Account</h2>
+
+                    <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>First Name *</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Enter your first name" {...field} />
+                                </FormControl>
+                                {/* {!field.value && (
+                                    <FormDescription>Enter a firstname.</FormDescription>
+                                )} */}
+                                {field.value && (
+
+                                    <FormMessage />
+                                )}
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Last Name *</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Enter your last name" {...field} />
+                                </FormControl>
+                                {/* {!field.value && (
+                                    <FormDescription>Enter a lastname.</FormDescription>
+                                )} */}
+                                {field.value && (
+
+                                    <FormMessage />
+                                )}
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => {
+                            return (
+                                <FormItem>
+                                    <FormLabel>E-Posta *</FormLabel>
+                                    <FormControl>
+                                        <Input onChange={(e) => field.onChange(e)} placeholder="E-Mail" />
+                                    </FormControl>
+                                    {/* {!field.value && (
+                                        <FormDescription>Enter an e-mail.</FormDescription>
+                                    )} */}
+                                    {field.value && (
+                                        <FormMessage />
+                                    )}
+                                </FormItem>
+                            )
+                        }}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password *</FormLabel>
+                                <FormControl>
+                                    <Input type="password" placeholder="Password" {...field} />
+                                </FormControl>
+                                {/* {!field.value && (
+                                    <FormDescription>Enter a password.</FormDescription>
+                                )} */}
+                                {field.value && (
+
+                                    <FormMessage />
+                                )}
+                            </FormItem>
+                        )}
+                    />
+
+                    <Button
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded font-semibold transition disabled:opacity-50 
+                        dark:bg-orange-500 dark:hover:bg-orange-500"
+                    >
+                        {form.formState.isSubmitting ? "Registering..." : "Register"}
+                    </Button>
+                </form>
+            </Form>
         </div>
     );
 };

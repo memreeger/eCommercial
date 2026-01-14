@@ -17,10 +17,10 @@ const Footer: React.FC = () => {
                 {/* Linkler */}
                 <div className="flex flex-col">
                     <h3 className="font-semibold mb-2 text-white">Quick Links</h3>
-                    <Link to="/" className="hover:text-blue-400 transition-colors">Home</Link>
-                    <Link to="/about" className="hover:text-blue-400 transition-colors">About</Link>
-                    <Link to="/shop" className="hover:text-blue-400 transition-colors">Shop</Link>
-                    <Link to="/contact" className="hover:text-blue-400 transition-colors">Contact</Link>
+                    <Link to="/" className="hover:text-orange-400 transition-colors dark:hover:text-blue-500">Home</Link>
+                    <Link to="/about" className="hover:text-orange-400 transition-colors dark:hover:text-blue-500">About</Link>
+                    <Link to="/shop" className="hover:text-orange-400 transition-colors dark:hover:text-blue-500">Shop</Link>
+                    <Link to="/contact" className="hover:text-orange-400 transition-colors dark:hover:text-blue-500">Contact</Link>
                 </div>
 
                 {/* Sosyal Medya */}
@@ -30,21 +30,21 @@ const Footer: React.FC = () => {
                         <a
                             href="https://www.facebook.com"
                             target="_blank"
-                            className="hover:text-blue-500 transition flex items-center gap-1"
+                            className="hover:text-orange-500 dark:hover:text-blue-500 transition flex items-center gap-1"
                         >
                             <FaFacebookF /> FB
                         </a>
                         <a
                             href="https://www.x.com"
                             target="_blank"
-                            className="hover:text-blue-500 transition flex items-center gap-1"
+                            className="hover:text-orange-500 dark:hover:text-blue-500 transition flex items-center gap-1"
                         >
                             <FaTwitter /> X
                         </a>
                         <a
                             href="https://www.instagram.com"
                             target="_blank"
-                            className="hover:text-blue-500 transition flex items-center gap-1"
+                            className="hover:text-orange-500 dark:hover:text-blue-500 transition flex items-center gap-1"
                         >
                             <FaInstagram /> IG
                         </a>

@@ -64,7 +64,8 @@ const ProductDetail: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 py-12">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="relative md:w-1/2 flex flex-col items-center">
-                    <img src={product.image} alt={product.title} className="w-full h-80 md:h-96 object-contain" />
+                    <img src={product.image} alt={product.title} className="w-full h-80 md:h-96 object-contain
+                    dark:bg-gray-200" />
 
                     <button
                         onClick={handleFavorite}
@@ -82,15 +83,16 @@ const ProductDetail: React.FC = () => {
 
                 <div className="md:w-1/2 flex flex-col justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-                        <p className="text-gray-700 mb-4">{product.description}</p>
-                        <p className="text-2xl font-bold text-blue-500 mb-6">${product.price}</p>
+                        <h1 className="text-3xl font-bold mb-4 dark:text-gray-200">{product.title}</h1>
+                        <p className="text-gray-700 mb-4 dark:text-gray-500">{product.description}</p>
+                        <p className="text-2xl font-bold text-blue-500 mb-6 dark:text-orange-500">${product.price}</p>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 mt-4">
                         <button
                             onClick={handleAddToCart}
-                            className="flex-1 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+                            className="flex-1 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition
+                            dark:bg-orange-500 dark:hover:bg-orange-600"
                         >
                             Add to Cart
                         </button>
@@ -101,7 +103,7 @@ const ProductDetail: React.FC = () => {
                             ← Go Back
                         </button>
                         {notifications.cart && (
-                            <div className="text-green-700 text-sm bg-green-100 px-2 py-1 rounded mt-2">
+                            <div className="text-green-700 text-sm bg-green-200 px-2 py-1 rounded mt-2">
                                 {notifications.cart}
                             </div>
                         )}

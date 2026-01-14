@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 
 const NotFound: React.FC = () => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800 px-4 sm:px-6">
-            <h1 className="text-5xl sm:text-6xl font-bold mb-4 animate-pulse text-red-500">404</h1>
-            <p className="text-lg sm:text-xl mb-6 text-center">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800 px-4 sm:px-6
+        dark:bg-black dark:text-white">
+            <h1 className="text-5xl sm:text-6xl font-bold mb-4 animate-pulse text-red-500 
+            dark:bg-black ">404</h1>
+            <p className="text-lg sm:text-xl mb-6 text-center 
+            dark:bg-black dark:text-white">
                 Oops! The page you are looking for does not exist.
             </p>
             <Link
