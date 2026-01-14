@@ -67,6 +67,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
             <img
                 src={product.image}
                 alt={product.title}
+                loading="lazy"
                 className="w-full h-56 sm:h-48 md:h-40 lg:h-48 object-contain mb-4"
             />
             <div className="flex-1 flex flex-col justify-between">

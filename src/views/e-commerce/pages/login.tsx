@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../services/firebase/firebase";
 import { Input } from "../../../components/ui/input";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../../../components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../components/ui/form";
 import { Button } from "../../../components/ui/button";
 import { loginSchema, type LoginFormValues } from "../schemas/login-schema";
 
