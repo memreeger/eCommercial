@@ -9,9 +9,11 @@ import { Input } from "../../../components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../components/ui/form";
 import { Button } from "../../../components/ui/button";
 import { loginSchema, type LoginFormValues } from "../schemas/login-schema";
+import { useTranslation } from "react-i18next";
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
@@ -29,7 +31,7 @@ const Login: React.FC = () => {
             navigate("/");
         } catch (error) {
             console.error(error);
-            alert("Giriş sırasında bir hata oluştu. Email ve şifreni kontrol et.");
+            alert(`${t("loginPage.errorAlert")}`);
         }
     };
 
@@ -41,7 +43,7 @@ const Login: React.FC = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-full max-w-md bg-gray-900 text-white rounded-xl p-8 shadow-lg space-y-6"
                 >
-                    <h2 className="text-3xl font-bold text-center ">Login</h2>
+                    <h2 className="text-3xl font-bold text-center ">{t("loginPage.title")}</h2>
 
                     <FormField
                         control={form.control}
@@ -49,9 +51,9 @@ const Login: React.FC = () => {
                         render={({ field }) => {
                             return (
                                 <FormItem>
-                                    <FormLabel>E-Posta *</FormLabel>
+                                    <FormLabel>{t("loginPage.emailLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input onChange={(e) => field.onChange(e)} placeholder="E-Mail" />
+                                        <Input onChange={(e) => field.onChange(e)} placeholder={t("loginPage.emailPlaceholder")} />
                                     </FormControl>
                                     {/* {!field.value && (
                                         <FormDescription>Enter an e-mail.</FormDescription>
@@ -70,9 +72,9 @@ const Login: React.FC = () => {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Password *</FormLabel>
+                                <FormLabel>{t("loginPage.passwordLabel")} *</FormLabel>
                                 <FormControl>
-                                    <Input type="password" placeholder="Password" {...field} />
+                                    <Input type="password" placeholder={t("loginPage.passwordPlaceholder")} {...field} />
                                 </FormControl>
                                 {/* {!field.value && (
                                     <FormDescription>Enter a password.</FormDescription>
@@ -101,18 +103,18 @@ const Login: React.FC = () => {
                         {form.formState.isSubmitting && (
                             <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                         )}
-                        {form.formState.isSubmitting ? "Logging in..." : "Login"}
+                        {form.formState.isSubmitting ? `${t("loginPage.loggingIn")}` : `${t("loginPage.loginButton")}`}
                     </Button>
 
                     <div className="mt-4 text-sm text-gray-300">
-                        Don't have an account?{" "}
+                        {t("loginPage.noAccount")}{" "}
                         <Link to="/register" className="text-blue-500 hover:underline">
-                            Click to Register
+                            {t("loginPage.clickToRegister")}
                         </Link>
                     </div>
                     <div className="mt-2 text-sm text-gray-300">
                         <Link to="/reset-password" className="text-blue-500 hover:underline">
-                            Forgot Password?
+                            {t("loginPage.forgotPassword")}
                         </Link>
                     </div>
                 </form>

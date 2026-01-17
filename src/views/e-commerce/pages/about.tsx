@@ -1,13 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 
 const About: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="max-w-6xl mx-auto px-4 py-16 
         dark:bg-black dark:text-white">
             <div className="text-center mb-12 dark:bg-black dark:text-white">
-                <h1 className="text-4xl sm:text-5xl font-bold mb-4 dark:bg-black dark:text-white">About Us</h1>
+                <h1 className="text-4xl sm:text-5xl font-bold mb-4 dark:bg-black dark:text-white">{t("aboutPage.aboutUs")}</h1>
                 <p className="text-gray-600 text-base sm:text-lg dark:bg-black dark:text-white">
-                    At Loft, we are passionate about curating high-quality products that bring joy and convenience to your everyday life.
+                    {t("aboutPage.introParagraph")}
                 </p>
             </div>
 
@@ -18,14 +22,12 @@ const About: React.FC = () => {
                     className="w-64 h-64 sm:w-72 sm:h-72 rounded-full object-cover shadow-lg mx-auto"
                 />
                 <div className="lg:w-2/3 text-center lg:text-left dark:bg-black dark:text-white">
-                    <h2 className="text-2xl sm:text-3xl font-semibold mb-4 dark:bg-black dark:text-white">Our Journey</h2>
+                    <h2 className="text-2xl sm:text-3xl font-semibold mb-4 dark:bg-black dark:text-white">{t("aboutPage.ourJourneyTitle")}</h2>
                     <p className="text-gray-700 mb-4 text-sm sm:text-base dark:bg-black dark:text-white">
-                        Founded in 2025, Loft started with a mission to simplify online shopping while offering products that combine style, durability, and practicality.
-                        Our team works tirelessly to handpick items that meet our high standards of quality and customer satisfaction.
+                        {t("aboutPage.ourJourneyParagraph1")}
                     </p>
                     <p className="text-gray-700 text-sm sm:text-base dark:bg-black dark:text-white">
-                        We believe that shopping should be more than just a transaction—it should be an enjoyable experience.
-                        That’s why we focus on providing exceptional service, fast delivery, and an easy-to-navigate platform that customers can trust.
+                        {t("aboutPage.ourJourneyParagraph2")}
                     </p>
                 </div>
             </div>
@@ -33,19 +35,19 @@ const About: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
                 <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition">
                     <h3 className="text-2xl sm:text-3xl font-bold text-orange-500 mb-1 sm:mb-2 dark:text-blue-500">2K+</h3>
-                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">Satisfied Customers</p>
+                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">{t("aboutPage.stats.satisfiedCustomers")}</p>
                 </div>
                 <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition">
                     <h3 className="text-2xl sm:text-3xl font-bold text-orange-500 mb-1 sm:mb-2 dark:text-blue-500">20+</h3>
-                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">Premium Products</p>
+                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">{t("aboutPage.stats.premiumProducts")}</p>
                 </div>
                 <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition">
                     <h3 className="text-2xl sm:text-3xl font-bold text-orange-500 mb-1 sm:mb-2 dark:text-blue-500">2+</h3>
-                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">Dedicated Team Members</p>
+                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">{t("aboutPage.stats.teamMembers")}</p>
                 </div>
                 <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition">
                     <h3 className="text-2xl sm:text-3xl font-bold text-orange-500 mb-1 sm:mb-2 dark:text-blue-500">24/7</h3>
-                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">Customer Support</p>
+                    <p className="text-gray-600 text-sm sm:text-base dark:text-white">{t("aboutPage.stats.customerSupport")}</p>
                 </div>
             </div>
         </div>

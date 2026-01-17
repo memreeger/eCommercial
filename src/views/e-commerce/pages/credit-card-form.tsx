@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 import { useCurrency } from "../hooks/useCurrency";
+import { useTranslation } from "react-i18next";
 
 const CreditCardForm: React.FC = () => {
     const { cart, clearCart } = useCart();
@@ -11,12 +12,13 @@ const CreditCardForm: React.FC = () => {
     const [expiry, setExpiry] = useState("");
     const [cvc, setCvc] = useState("");
     const { currency, convertPrice } = useCurrency();
+    const { t } = useTranslation();
 
     const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Payment Successful! Total: $${totalPrice.toFixed(2)}`);
+        alert(` ${t("creditCartForm.paymentSuccess")} $${totalPrice.toFixed(2)}`);
         clearCart();
         navigate("/");
     };
@@ -24,23 +26,23 @@ const CreditCardForm: React.FC = () => {
     if (cart.length === 0)
         return (
             <div className="max-w-4xl mx-auto px-4 py-12 text-center">
-                <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
+                <h2 className="text-2xl font-bold mb-4">{t("creditCartForm.emptyCartTitle")}</h2>
                 <button
                     onClick={() => navigate("/shop")}
                     className="text-blue-500 hover:underline"
                 >
-                    Go to Shop
+                    {t("creditCartForm.goToShop")}
                 </button>
             </div>
         );
 
     return (
         <div className="max-w-2xl mx-auto px-4 py-12 dark:bg-black dark:text-white">
-            <h2 className="text-3xl font-bold mb-8 text-center dark:bg-black dark:text-white">Credit Card Payment</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center dark:bg-black dark:text-white">{t("creditCartForm.title")}</h2>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                     type="text"
-                    placeholder="Card Number"
+                    placeholder={t("creditCardForm.cardNumber")}
                     value={cardNumber}
                     onChange={e => setCardNumber(e.target.value)}
                     required
@@ -52,7 +54,7 @@ const CreditCardForm: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                     <input
                         type="text"
-                        placeholder="Expiry MM/YY"
+                        placeholder={t("creditCardForm.expiry")}
                         value={expiry}
                         onChange={e => setExpiry(e.target.value)}
                         required
@@ -63,7 +65,7 @@ const CreditCardForm: React.FC = () => {
                     />
                     <input
                         type="text"
-                        placeholder="CVC"
+                        placeholder={t("creditCardForm.cvc")}
                         value={cvc}
                         onChange={e => setCvc(e.target.value)}
                         required
@@ -77,7 +79,7 @@ const CreditCardForm: React.FC = () => {
                     className="w-full bg-orange-500 font-bold text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition mt-4
                     dark:bg-blue-500 dark:text-black
                     dark:hover:bg-blue-600">
-                    Pay {convertPrice(totalPrice).toFixed(2)} {currency}
+                    {t("creditCardForm.pay")} {convertPrice(totalPrice).toFixed(2)} {currency}
                 </button>
             </form>
         </div>

@@ -1,0 +1,283 @@
+{
+    "navbar": {
+        "home": "Ana Sayfa",
+        "about": "Hakkımızda",
+        "contact": "İletişim",
+        "settings": "Ayarlar",
+        "shop": "Mağaza",
+        "allProducts": "Tüm Ürünler",
+        "electronics": "Elektronik",
+        "jewelery": "Takı",
+        "womensClothing": "Kadın Giyim",
+        "mensClothing": "Erkek Giyim",
+        "others": "Diğer",
+        "login": "Giriş Yap",
+        "register": "Kayıt Ol",
+        "logout": "Çıkış Yap",
+        "language": "Dil: ",
+        "theme": "Tema :"
+    },
+    "homePage": {
+        "hero": {
+            "title": "NØRA'ya Hoş Geldiniz",
+            "subtitle": "En iyi fiyatlarla yüksek kaliteli ürünleri keşfedin. Bugün stilinizi bulun!"
+        },
+        "products": {
+            "featuredTitle": "Öne Çıkan Ürünler",
+            "searchPlaceholder": "Ürünleri ara...",
+            "loading": "Yükleniyor...",
+            "noResults": "Aramanıza uygun ürün bulunamadı.",
+            "loadMore": "Daha Fazla Yükle",
+            "endMessage": "🎉 Tüm ürünleri görüntülediniz."
+        }
+    },
+    "aboutPage": {
+        "aboutUs": "Hakkımızda",
+        "introParagraph": "NØRA olarak, günlük yaşamınıza neşe ve kolaylık katacak yüksek kaliteli ürünler sunmaya tutkuyla bağlıyız.",
+        "ourJourneyTitle": "Bizim Yolculuğumuz",
+        "ourJourneyParagraph1": "2025 yılında kurulan NØRA, çevrimiçi alışverişi basitleştirme ve stil, dayanıklılık ve pratikliği bir araya getiren ürünler sunma misyonuyla yola çıktı. Ekibimiz, yüksek kalite ve müşteri memnuniyeti standartlarımıza uygun ürünleri titizlikle seçmek için yorulmadan çalışıyor.",
+        "ourJourneyParagraph2": "Alışverişin sadece bir işlemden ibaret olmaması gerektiğine inanıyoruz—keyifli bir deneyim olmalı. Bu yüzden olağanüstü hizmet, hızlı teslimat ve müşterilerin güvenebileceği kolay kullanılabilir bir platform sağlamaya odaklanıyoruz.",
+        "stats": {
+            "satisfiedCustomers": "Memnun Müşteriler",
+            "premiumProducts": "Premium Ürünler",
+            "teamMembers": "Özverili Ekip Üyeleri",
+            "customerSupport": "Müşteri Desteği"
+        }
+    },
+    "contactPage": {
+        "title": "İletişim",
+        "intro": "Bize bir mesaj gönderin, en kısa sürede size geri dönüş yapalım.",
+        "successMessage": "Teşekkürler! Mesajınız gönderildi.",
+        "form": {
+            "name": "İsim",
+            "email": "E-posta",
+            "subject": "Konu",
+            "message": "Mesaj",
+            "submitButton": "Mesaj Gönder"
+        },
+        "contactInfo": {
+            "email": "E-posta: contact@noraShop.com",
+            "phone": "Telefon: +90 500 00 00",
+            "address": "Adres: 123 Nora Street, Nora City"
+        }
+    },
+    "loginPage": {
+        "title": "Giriş Yap",
+        "emailLabel": "E-Posta *",
+        "emailPlaceholder": "E-Posta",
+        "passwordLabel": "Şifre *",
+        "passwordPlaceholder": "Şifre",
+        "loginButton": "Giriş Yap",
+        "loggingIn": "Giriş Yapılıyor...",
+        "noAccount": "Hesabınız yok mu?",
+        "clickToRegister": "Kayıt Olmak İçin Tıklayın",
+        "forgotPassword": "Şifremi Unuttum?",
+        "errorAlert": "Giriş sırasında bir hata oluştu. Lütfen e-posta ve şifrenizi kontrol edin."
+    },
+    "productDetail": {
+        "loading": "Yükleniyor...",
+        "notFound": "Ürün bulunamadı.",
+        "addToCart": "Kart'a Ekle",
+        "goBack": "← Geri dön",
+        "addedToCart": "Ürün karta eklendi",
+        "addedToFavorites": "Ürün favorilere eklendi",
+        "removedFromFavorites": "Ürün favorilerden silindi"
+    },
+    "sortSelect": {
+        "defaultOption": "Sıralama Seçiniz",
+        "priceAsc": "Fiyat : Artan",
+        "priceDesc": "Fiyat : Azalan"
+    },
+    "productCard": {
+        "addToCart": "Kart'a Ekle",
+        "addedToCart": "Ürün karta eklendi",
+        "addedToFavorites": "Ürün favorilere eklendi",
+        "removedFromFavorites": "Ürün favorilerden silindi"
+    },
+    "cart": {
+        "emptyTitle": "Sepetiniz boş",
+        "emptyText": "Mağazamızı gezip ürünleri sepetinize ekleyin, burada görebilirsiniz.",
+        "goToShop": "Mağazaya Git",
+        "cartTitle": "Sepetiniz",
+        "total": "Toplam",
+        "remove": "Kaldır",
+        "proceedCheckout": "Ödeme Yap"
+    },
+    "checkout": {
+        "emptyCartTitle": "Sepetiniz boş",
+        "goToShop": "Mağazaya Git",
+        "checkoutTitle": "Ödeme",
+        "orderSummary": "Sipariş Özeti",
+        "total": "Toplam",
+        "fullName": "Ad Soyad",
+        "email": "E-posta",
+        "address": "Adres",
+        "paymentMethod": "Ödeme Yöntemi",
+        "creditCard": "Kredi Kartı",
+        "cashOnDelivery": "Kapıda Ödeme",
+        "eftFast": "EFT/FAST",
+        "pay": "Öde"
+    },
+    "creditCardForm": {
+        "emptyCartTitle": "Sepetiniz boş",
+        "goToShop": "Mağazaya Git",
+        "title": "Kredi Kartı Ödemesi",
+        "cardNumber": "Kart Numarası",
+        "expiry": "Son Kullanma MM/YY",
+        "cvc": "CVC",
+        "pay": "Öde",
+        "paymentSuccess": "Ödeme Başarılı! Toplam:"
+    },
+    "favoritesPage": {
+        "title": "Favorileriniz",
+        "loading": "Yükleniyor...",
+        "emptyTitle": "Henüz favori eklemediniz",
+        "emptyDesc": "Ürünlerimizi inceleyin ve favorilerinize ekleyin, burada görebilirsiniz.",
+        "goToShop": "Mağazaya Git"
+    },
+    "footer": {
+        "logo": "NØRA",
+        "aboutText": "Kapınıza kaliteli ürünler teslim edilir.",
+        "quickLinks": "Linkler",
+        "links": {
+            "home": "Ana Sayfa",
+            "about": "Hakkımızda",
+            "shop": "Mağaza",
+            "contact": "İletişim"
+        },
+        "followUs": "Bizi Takip Edin",
+        "copyright": "Tüm hakları saklıdır."
+    },
+    "productPage": {
+        "loading": "yükleniyor..."
+    },
+    "registerPage": {
+        "title": "Hesap Oluştur",
+        "fields": {
+            "firstName": {
+                "label": "Ad *",
+                "placeholder": "Adınızı girin"
+            },
+            "lastName": {
+                "label": "Soyad *",
+                "placeholder": "Soyadınızı girin"
+            },
+            "email": {
+                "label": "E-Posta *",
+                "placeholder": "E-posta adresinizi girin"
+            },
+            "password": {
+                "label": "Şifre *",
+                "placeholder": "Şifrenizi girin"
+            }
+        },
+        "buttons": {
+            "register": "Kayıt Ol",
+            "registering": "Kaydediliyor..."
+        },
+        "errors": {
+            "generic": "Kayıt sırasında bir hata oluştu."
+        }
+    },
+    "resetPassword": {
+        "title": "Şifreni Sıfırla",
+        "fields": {
+            "email": {
+                "placeholder": "E-posta adresinizi girin"
+            }
+        },
+        "buttons": {
+            "send": "Sıfırlama E-postası Gönder",
+            "sending": "Gönderiliyor..."
+        },
+        "messages": {
+            "success": "Şifre sıfırlama e-postası gönderildi. Lütfen gelen kutunuzu kontrol edin.",
+            "error": "Bir hata oluştu. Lütfen e-posta adresinizi kontrol edin."
+        },
+        "links": {
+            "backToLogin": "Girişe Dön"
+        }
+    },
+    "products": {
+        "1": {
+            "title": "Fjallraven - Foldsack No. 1 Sırt Çantası, 15 İnç Laptop için Uygun",
+            "description": "Günlük kullanım ve ormanda yürüyüşler için mükemmel çantanız. Laptopunuzu (15 inç’e kadar) yastıklı bölmeye koyabilirsiniz."
+        },
+        "2": {
+            "title": "Erkek Günlük Premium Slim Fit Tişört",
+            "description": "Dar kesim tarzı, kontrast raglan uzun kol, üç düğmeli henley plaka, hafif ve yumuşak kumaş ile nefes alabilir ve rahat giyilebilir. Yuvarlak yakalı dayanıklı dikişli tişörtler gündelik moda için mükemmeldir."
+        },
+        "3": {
+            "title": "Erkek Pamuk Ceket",
+            "description": "Bahar/sonbahar/kış için harika dış giyim ceketi, çalışma, yürüyüş, kamp, dağ tırmanışı, bisiklet, seyahat veya diğer açık hava aktiviteleri için uygundur. Kendiniz veya aileniz için iyi bir hediye seçeneği."
+        },
+        "4": {
+            "title": "Erkek Günlük Slim Fit",
+            "description": "Renk, ekranda ve gerçek üründe biraz farklı olabilir. Vücut yapıları kişiden kişiye değişir, bu nedenle ürün açıklamasında detaylı beden bilgilerini kontrol edin."
+        },
+        "5": {
+            "title": "John Hardy Kadın Naga Altın & Gümüş Ejderha Zincir Bileklik",
+            "description": "Legends Koleksiyonumuzdan Naga, okyanusun incisini koruyan efsanevi su ejderhasından ilham alınarak tasarlanmıştır. İçe doğru takın, sevgi ve bolluk; dışa doğru takın, koruma için."
+        },
+        "6": {
+            "title": "Sarı Altın Petite Mikropave",
+            "description": "Memnuniyet garantisi. Herhangi bir siparişi 30 gün içinde iade veya değişim yapabilirsiniz. ABD’de Hafeez Center tarafından tasarlanmış ve satılmıştır."
+        },
+        "7": {
+            "title": "Beyaz Altın Kaplama Prenses Yüzük",
+            "description": "Klasik tasarlanmış tektaş nişan yüzüğü. Sevgiyi artırmak için hediye: Nişan, düğün, yıldönümü, Sevgililer Günü..."
+        },
+        "8": {
+            "title": "Delikli Baykuş Gül Altın Kaplama Çift Tünel Küpe",
+            "description": "316L paslanmaz çelikten yapılmış gül altın kaplama çift flared tünel küpeler."
+        },
+        "9": {
+            "title": "WD 2TB Elements Taşınabilir Harici Hard Disk - USB 3.0",
+            "description": "USB 3.0 ve USB 2.0 uyumluluğu, hızlı veri transferi, yüksek kapasite; Windows 10, 8.1, 7 için NTFS formatlı. Uyumluluk cihaz ve işletim sistemine göre değişebilir."
+        },
+        "10": {
+            "title": "SanDisk SSD PLUS 1TB Dahili SSD - SATA III 6 Gb/s",
+            "description": "Daha hızlı açılış, kapanış ve uygulama yükleme için kolay yükseltme. Patlama yazma performansını artırır, tipik PC iş yükleri için idealdir. Performans ve güvenilirliğin mükemmel dengesi."
+        },
+        "11": {
+            "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performans Artırıcı SATA III 2.5",
+            "description": "3D NAND flaş, yüksek aktarım hızları sağlar. SLC Cache teknolojisi performansı artırır ve daha uzun ömür sunar."
+        },
+        "12": {
+            "title": "WD 4TB Oyun Disk Playstation 4 ile Uyumludur",
+            "description": "PS4 oyun deneyiminizi genişletin, her yerde hızlı ve kolay kurulum. Şık tasarım, yüksek kapasite, 3 yıllık üretici garantisi."
+        },
+        "13": {
+            "title": "Acer SB220Q bi 21.5 inç Full HD IPS Ultra İnce Monitör",
+            "description": "21.5 inç Full HD IPS ekran, Radeon Free Sync teknolojisi, ultra ince tasarım, 4ms tepki süresi, 16:9 ekran oranı, 16.7 milyon renk."
+        },
+        "14": {
+            "title": "Samsung 49-Inç CHG90 144Hz Kavisli Oyun Monitörü – Süper Ultrawide QLED",
+            "description": "Çift 27 inç ekranlı süper ultrawide oyun monitörü. HDR desteği, fabrikadan kalibre edilmiş renk ve kontrast, 144Hz yüksek yenileme hızı, 1ms ultra hızlı tepki."
+        },
+        "15": {
+            "title": "BIYLACLESEN Kadın 3-in-1 Snowboard Montu Kışlık",
+            "description": "ABD standardı. Malzeme: %100 polyester; çıkarılabilir astar, sıcak ve hafif. 3-in-1 tasarım ile mont ve iç kısmı ayrı veya birlikte giyilebilir."
+        },
+        "16": {
+            "title": "Lock and Love Kadın Çıkarılabilir Kapüşonlu Moto Ceket",
+            "description": "Stil ve konfor için suni deri. 2 ön cep. Sadece elde yıkama / ağartıcı kullanmayın / asın / ütülemeyin."
+        },
+        "17": {
+            "title": "Kadın Yağmurluk Rüzgarlık Çizgili Tırmanış Montları",
+            "description": "Hafif, gezi veya günlük kullanım için mükemmel. Kapüşonlu uzun kol, ayarlanabilir bel ipi. Ön düğmeli ve fermuarlı kapama, yan cepler."
+        },
+        "18": {
+            "title": "MBJ Kadın Kısa Kollu V Yaka Üst",
+            "description": "%95 rayon, %5 spandex, ABD’de üretilmiştir. Hafif, rahat kumaş. Kol ve yaka ribbedir."
+        },
+        "19": {
+            "title": "Opna Kadın Kısa Kollu Nemli Tişört",
+            "description": "%100 polyester, makinede yıkanabilir. Hafif, bol ve nefes alabilir kumaş, V yaka ve rahat oturuş."
+        },
+        "20": {
+            "title": "DANVOUY Kadın Pamuk Kısa Tişört",
+            "description": "%95 pamuk, %5 spandex. Günlük kullanım, kısa kollu, V yaka, rahat ve esnek."
+        }
+    }
+}

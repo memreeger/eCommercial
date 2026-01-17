@@ -5,6 +5,7 @@ import type { Product } from "../types/product";
 import { useFavorite } from "../hooks/useFavorite";
 import { useCart } from "../hooks/useCart";
 import { useCurrency } from "../hooks/useCurrency";
+import { useTranslation } from "react-i18next";
 
 interface Props {
     product: Product;
@@ -15,6 +16,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     const { addToCart } = useCart();
     const { addFavorite, removeFavorite, isFavorite } = useFavorite();
     const { currency, convertPrice } = useCurrency();
+    const { t } = useTranslation();
 
     const [notifications, setNotifications] = useState<{ fav?: string; cart?: string }>({});
 
@@ -22,10 +24,10 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         e.stopPropagation();
         if (!isFavorite(product.id)) {
             addFavorite(product);
-            setNotifications({ fav: "Added to favorites" });
+            setNotifications({ fav: `${t("productCard.addedToFavorites")}` });
         } else {
             removeFavorite(product.id);
-            setNotifications({ fav: "Removed from favorites" });
+            setNotifications({ fav: `${t("productCard.removedFromFavorites")}` });
         }
         setTimeout(() => setNotifications({}), 1500);
     };
@@ -33,7 +35,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
         addToCart(product);
-        setNotifications({ cart: "Added to cart" });
+        setNotifications({ cart: `${t("productCard.addedToCart")}` });
         setTimeout(() => setNotifications({}), 1500);
     };
 
@@ -66,12 +68,12 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
             <img
                 src={product.image}
-                alt={product.title}
+                alt={t(`products.${product.id}.title`)}
                 loading="lazy"
                 className="w-full h-56 sm:h-48 md:h-40 lg:h-48 object-contain mb-4"
             />
             <div className="flex-1 flex flex-col justify-between">
-                <h3 className="font-semibold mb-2 text-sm sm:text-base md:text-lg dark:text-black">{product.title}</h3>
+                <h3 className="font-semibold mb-2 text-sm sm:text-base md:text-lg dark:text-black"> {t(`products.${product.id}.title`)}</h3>
                 <p className="text-blue-500 font-bold text-lg mt-2 dark:text-orange-500">{convertPrice(product.price).toFixed(2)} {currency}</p>
             </div>
 
@@ -80,7 +82,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 className="mt-4 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition 
                 dark:bg-blue-500 dark:hover:bg-blue-600"
             >
-                Add to Cart
+                {t("productCard.addToCart")}
             </button>
         </div>
     );

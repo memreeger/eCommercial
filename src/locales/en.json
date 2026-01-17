@@ -1,0 +1,288 @@
+{
+    "navbar": {
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact",
+        "settings": "Settings",
+        "shop": "Shop",
+        "allProducts": "All Products",
+        "electronics": "Electronics",
+        "jewelery": "Jewelery",
+        "womensClothing": "Women’s Clothing",
+        "mensClothing": "Men’s Clothing",
+        "others": "Others",
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout",
+        "language": "Lang: ",
+        "theme": "Theme: "
+    },
+    "homePage": {
+        "hero": {
+            "title": "Welcome to NØRA Shop",
+            "subtitle": "Discover high quality products at the best prices. Find your style today!"
+        },
+        "products": {
+            "featuredTitle": "Featured Products",
+            "searchPlaceholder": "Search products...",
+            "loading": "Loading...",
+            "noResults": "We couldn't find any products matching your search.",
+            "loadMore": "Load More",
+            "endMessage": "🎉 You have reached the end of the products."
+        }
+    },
+    "aboutPage": {
+        "aboutUs": "About Us",
+        "introParagraph": "At NØRA, we are passionate about curating high-quality products that bring joy and convenience to your everyday life.",
+        "ourJourneyTitle": "Our Journey",
+        "ourJourneyParagraph1": "Founded in 2025, NØRA started with a mission to simplify online shopping while offering products that combine style, durability, and practicality. Our team works tirelessly to handpick items that meet our high standards of quality and customer satisfaction.",
+        "ourJourneyParagraph2": "We believe that shopping should be more than just a transaction—it should be an enjoyable experience. That’s why we focus on providing exceptional service, fast delivery, and an easy-to-navigate platform that customers can trust.",
+        "stats": {
+            "satisfiedCustomers": "Satisfied Customers",
+            "premiumProducts": "Premium Products",
+            "teamMembers": "Dedicated Team Members",
+            "customerSupport": "Customer Support"
+        }
+    },
+    "contactPage": {
+        "title": "Contact Us",
+        "intro": "Send us a message and we’ll get back to you as soon as possible.",
+        "successMessage": "Thank you! Your message has been sent.",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "subject": "Subject",
+            "message": "Message",
+            "submitButton": "Send Message"
+        },
+        "contactInfo": {
+            "email": "Email: contact@norashop.com",
+            "phone": "Phone: +90 500 00 00",
+            "address": "Address: 123 Nora Street, Nora City"
+        }
+    },
+    "loginPage": {
+        "title": "Login",
+        "emailLabel": "E-Mail *",
+        "emailPlaceholder": "E-Mail",
+        "passwordLabel": "Password *",
+        "passwordPlaceholder": "Password",
+        "loginButton": "Login",
+        "loggingIn": "Logging in...",
+        "noAccount": "Don't have an account?",
+        "clickToRegister": "Click to Register",
+        "forgotPassword": "Forgot Password?",
+        "errorAlert": "An error occurred during login. Please check your email and password."
+    },
+    "productDetail": {
+        "loading": "Loading...",
+        "notFound": "Product not found.",
+        "addToCart": "Add to Cart",
+        "goBack": "← Go Back",
+        "addedToCart": "Product added to cart",
+        "addedToFavorites": "Added to favorites",
+        "removedFromFavorites": "Removed from favorites"
+    },
+    "sortSelect": {
+        "defaultOption": "Select To Sort",
+        "priceAsc": "Price : Low to High",
+        "priceDesc": "Price : High to Low"
+    },
+    "productCard": {
+        "addToCart": "Add to Cart",
+        "addedToCart": "Product added to cart",
+        "addedToFavorites": "Added to favorites",
+        "removedFromFavorites": "Removed from favorites"
+    },
+    "cart": {
+        "emptyTitle": "Your cart is empty",
+        "emptyText": "Browse our shop and add items to your cart to see them here.",
+        "goToShop": "Go to Shop",
+        "cartTitle": "Your Cart",
+        "total": "Total",
+        "remove": "Remove",
+        "proceedCheckout": "Proceed to Checkout"
+    },
+    "checkout": {
+        "emptyCartTitle": "Your cart is empty",
+        "goToShop": "Go to Shop",
+        "checkoutTitle": "Checkout",
+        "orderSummary": "Order Summary",
+        "total": "Total",
+        "fullName": "Full Name",
+        "email": "Email",
+        "address": "Address",
+        "paymentMethod": "Payment Method",
+        "creditCard": "Credit Card",
+        "cashOnDelivery": "Cash on Delivery",
+        "eftFast": "EFT/FAST",
+        "pay": "Pay"
+    },
+    "creditCardForm": {
+        "emptyCartTitle": "Your cart is empty",
+        "goToShop": "Go to Shop",
+        "title": "Credit Card Payment",
+        "cardNumber": "Card Number",
+        "expiry": "Expiry MM/YY",
+        "cvc": "CVC",
+        "pay": "Pay",
+        "paymentSuccess": "Payment Successful! Total:"
+    },
+    "favoritesPage": {
+        "title": "Your Favorites",
+        "loading": "Loading...",
+        "emptyTitle": "You haven't added any favorites yet",
+        "emptyDesc": "Browse our products and add your favorites to see them here.",
+        "goToShop": "Go to Shop"
+    },
+    "footer": {
+        "logo": "NØRA",
+        "aboutText": "Quality products delivered to your doorstep.",
+        "quickLinks": "Quick Links",
+        "links": {
+            "home": "Home",
+            "about": "About",
+            "shop": "Shop",
+            "contact": "Contact"
+        },
+        "followUs": "Follow Us",
+        "social": {
+            "facebook": "FB",
+            "twitter": "X",
+            "instagram": "IG"
+        },
+        "copyright": "All rights reserved."
+    },
+    "productPage": {
+        "loading": "loading..."
+    },
+    "registerPage": {
+        "title": "Create Account",
+        "fields": {
+            "firstName": {
+                "label": "First Name *",
+                "placeholder": "Enter your first name"
+            },
+            "lastName": {
+                "label": "Last Name *",
+                "placeholder": "Enter your last name"
+            },
+            "email": {
+                "label": "Email * ",
+                "placeholder": "Enter your email"
+            },
+            "password": {
+                "label": "Password *",
+                "placeholder": "Enter your password"
+            }
+        },
+        "buttons": {
+            "register": "Register",
+            "registering": "Registering..."
+        },
+        "errors": {
+            "generic": "An error occurred during registration."
+        }
+    },
+    "resetPassword": {
+        "title": "Reset your password",
+        "fields": {
+            "email": {
+                "placeholder": "Enter your email address"
+            }
+        },
+        "buttons": {
+            "send": "Send re-set email",
+            "sending": "Sending..."
+        },
+        "messages": {
+            "success": "Password reset email sent. Please check your inbox.",
+            "error": "Something went wrong. Please check your email."
+        },
+        "links": {
+            "backToLogin": "Back to Login"
+        }
+    },
+    "products": {
+        "1": {
+            "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15-Inch Laptop",
+            "description": "Perfect backpack for everyday use and forest walks. Store your laptop (up to 15 inches) in the padded sleeve."
+        },
+        "2": {
+            "title": "Men's Casual Premium Slim Fit T-Shirt",
+            "description": "Slim fit style, contrast raglan long sleeve, three-button henley placket, lightweight and soft fabric for breathable and comfortable wear. Durable round-neck stitched t-shirt perfect for casual fashion."
+        },
+        "3": {
+            "title": "Men's Cotton Jacket",
+            "description": "Great outerwear jacket for spring/autumn/winter, suitable for work, hiking, camping, mountain climbing, cycling, travel, or other outdoor activities. Great gift for yourself or family."
+        },
+        "4": {
+            "title": "Men's Casual Slim Fit",
+            "description": "Color may slightly vary between screen and actual product. Body shapes differ, so check detailed size info in product description."
+        },
+        "5": {
+            "title": "John Hardy Women's Naga Gold & Silver Dragon Chain Bracelet",
+            "description": "From our Legends Collection, Naga is inspired by the mythical water dragon that protects the ocean’s pearl. Wear inward for love and abundance; outward for protection."
+        },
+        "6": {
+            "title": "Solid Gold Petite Micropave",
+            "description": "Satisfaction guaranteed. Return or exchange any order within 30 days. Designed and sold by Hafeez Center in the USA."
+        },
+        "7": {
+            "title": "White Gold Plated Princess Ring",
+            "description": "Classic designed solitaire engagement ring. Gift to enhance love: Engagement, Wedding, Anniversary, Valentine's Day..."
+        },
+        "8": {
+            "title": "Pierced Owl Rose Gold Plated Double Tunnel Earrings",
+            "description": "Made of 316L stainless steel, rose gold plated double flared tunnel earrings."
+        },
+        "9": {
+            "title": "WD 2TB Elements Portable External Hard Drive - USB 3.0",
+            "description": "USB 3.0 and USB 2.0 compatible, fast data transfer, high capacity; NTFS formatted for Windows 10, 8.1, 7. Compatibility may vary based on device and OS."
+        },
+        "10": {
+            "title": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
+            "description": "Easy upgrade for faster boot, shutdown, and app load. Boosts burst write performance, ideal for typical PC workloads. Perfect balance of performance and reliability."
+        },
+        "11": {
+            "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+            "description": "3D NAND flash delivers high transfer speeds. SLC Cache technology boosts performance and extends lifespan."
+        },
+        "12": {
+            "title": "WD 4TB Gaming Drive Works with Playstation 4",
+            "description": "Expand your PS4 gaming experience, fast and easy setup anywhere. Sleek design, high capacity, 3-year manufacturer warranty."
+        },
+        "13": {
+            "title": "Acer SB220Q bi 21.5-Inch Full HD IPS Ultra Thin Monitor",
+            "description": "21.5-inch Full HD IPS display, Radeon Free Sync technology, ultra-thin design, 4ms response time, 16:9 aspect ratio, 16.7 million colors."
+        },
+        "14": {
+            "title": "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor – Super Ultrawide QLED",
+            "description": "Super ultrawide gaming monitor with dual 27-inch screens. HDR support, factory calibrated color and contrast, 144Hz refresh rate, 1ms ultra-fast response."
+        },
+        "15": {
+            "title": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter",
+            "description": "US standard size. Material: 100% polyester; removable liner, warm and lightweight. 3-in-1 design allows separate or combined wear of coat and inner liner."
+        },
+        "16": {
+            "title": "Lock and Love Women's Removable Hooded Moto Jacket",
+            "description": "Faux leather for style and comfort. 2 front pockets. Hand wash only / Do not bleach / Hang / Do not iron."
+        },
+        "17": {
+            "title": "Women's Striped Windbreaker Climbing Raincoat",
+            "description": "Lightweight, perfect for travel or casual wear. Long sleeve with hood, adjustable waist cord. Front button and zipper closure, side pockets."
+        },
+        "18": {
+            "title": "MBJ Women's Short Sleeve V-Neck Top",
+            "description": "95% rayon, 5% spandex, made in the USA. Lightweight and comfortable fabric. Ribbed sleeves and neckline."
+        },
+        "19": {
+            "title": "Opna Women's Short Sleeve Moisture T-Shirt",
+            "description": "100% polyester, machine washable. Lightweight, loose, breathable fabric with V-neck and comfortable fit."
+        },
+        "20": {
+            "title": "DANVOUY Women's Casual Cotton Short T-Shirt",
+            "description": "95% cotton, 5% spandex. Casual, short sleeve, V-neck, soft and stretchy."
+        }
+    }
+}

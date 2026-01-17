@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -7,6 +8,7 @@ const Contact: React.FC = () => {
         subject: "",
         message: "",
     });
+    const { t } = useTranslation();
 
     const [submitted, setSubmitted] = useState(false);
 
@@ -23,14 +25,14 @@ const Contact: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-6 py-12">
-            <h1 className="text-4xl font-bold text-center mb- dark:text-white">Contact Us</h1>
+            <h1 className="text-4xl font-bold text-center mb- dark:text-white">{t("contactPage.title")}</h1>
             <p className="text-center text-gray-600 mb-12 dark:text-gray-400">
-                Send us a message and we’ll get back to you as soon as possible.
+                {t("contactPage.intro")}
             </p>
 
             {submitted && (
                 <p className="text-green-500 text-center mb-6 font-semibold dark:text-gray-500">
-                    Thank you! Your message has been sent.
+                    {t("contactPage.successMessage")}
                 </p>
             )}
 
@@ -41,7 +43,7 @@ const Contact: React.FC = () => {
                 <input
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    placeholder={t("contactPage.form.name")}
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -51,7 +53,7 @@ const Contact: React.FC = () => {
                 <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder={t("contactPage.form.email")}
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -61,7 +63,7 @@ const Contact: React.FC = () => {
                 <input
                     type="text"
                     name="subject"
-                    placeholder="Subject"
+                    placeholder={t("contactPage.form.subject")}
                     value={formData.subject}
                     onChange={handleChange}
                     className="col-span-2 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500
@@ -69,7 +71,7 @@ const Contact: React.FC = () => {
                 />
                 <textarea
                     name="message"
-                    placeholder="Message"
+                    placeholder={t("contactPage.form.message")}
                     value={formData.message}
                     onChange={handleChange}
                     required
@@ -83,14 +85,14 @@ const Contact: React.FC = () => {
                     className="col-span-2 bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition
                     dark:bg-blue-500 dark:hover:bg-blue-600"
                 >
-                    Send Message
+                    {t("contactPage.form.submitButton")}
                 </button>
             </form>
 
             <div className="mt-12 text-center text-gray-600 space-y-2 dark:text-gray-500">
-                <p>Email: contact@myEcommerceshop.com</p>
-                <p>Phone: +90 500 00 00</p>
-                <p>Address: 123 Commerce Street, Commerce City</p>
+                <p>{t("contactPage.contactInfo.email")}</p>
+                <p>{t("contactPage.contactInfo.phone")}</p>
+                <p>{t("contactPage.contactInfo.address")}</p>
             </div>
         </div>
     );

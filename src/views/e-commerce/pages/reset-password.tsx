@@ -2,11 +2,13 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../services/firebase/firebase";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ResetPassword: React.FC = () => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
+    const { t } = useTranslation();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,10 +20,10 @@ const ResetPassword: React.FC = () => {
 
         try {
             await sendPasswordResetEmail(auth, email);
-            setMessage("Password reset email sent. Please check your inbox.");
+            setMessage(`${t("resetPassword.messages.succes")}`);
         } catch (error) {
             console.error(error);
-            setMessage("Something went wrong. Please check your email.");
+            setMessage(`${t("resetPassword.messages.error")}`);
         } finally {
             setLoading(false);
         }
@@ -37,13 +39,13 @@ const ResetPassword: React.FC = () => {
                 className="w-full max-w-md bg-white p-6 rounded shadow"
             >
                 <h2 className="text-xl font-bold mb-4 text-center">
-                    Reset your password
+                    {t("resetPassword.title")}
                 </h2>
 
                 <input
                     type="email"
                     className="w-full p-3 mb-4 rounded bg-white text-black border focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    placeholder="Enter your email address"
+                    placeholder={t("resetPassword.fields.email.placeholder")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -54,7 +56,7 @@ const ResetPassword: React.FC = () => {
                     disabled={loading}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded font-semibold transition disabled:opacity-50"
                 >
-                    {loading ? "Sending..." : "Send reset email"}
+                    {loading ? `${t("resetPassword.buttons.sending")}` : `${t("resetPassword.buttons.send")}`}
                 </button>
 
                 {message && (
@@ -65,7 +67,7 @@ const ResetPassword: React.FC = () => {
 
                 <div className="mt-4 text-center text-sm">
                     <Link to="/login" className="text-blue-600 hover:underline">
-                        Back to Login
+                        {t("resetPassword.links.backToLogin")}
                     </Link>
                 </div>
             </form>

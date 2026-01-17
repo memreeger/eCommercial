@@ -6,6 +6,8 @@ import {
     getProducts,
     getProductsByCategory,
 } from "../../../services/fakestoreapi/productService";
+import SortSelect from "../components/sort";
+import { useTranslation } from "react-i18next";
 
 const PRODUCTS_PER_PAGE = 8;
 
@@ -24,7 +26,7 @@ const categoryMap: Record<string, string> = {
     "mens-clothing": "men's clothing",
 };
 
-type SortType = "price-asc" | "price-desc";
+export type SortType = "price-asc" | "price-desc";
 
 const Products: React.FC = () => {
     const { category } = useParams<{ category?: string }>();
@@ -34,9 +36,11 @@ const Products: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1); // direkt 1. sayfa için
 
+    const { t } = useTranslation();
+
     useEffect(() => {
-        const pageParam = parseInt(searchParams.get("page") || "1", 10); // 10luk tabana çevirmek için
-        const sortParam = (searchParams.get("sort") || "") as SortType;
+        const pageParam = parseInt(searchParams.get("page") || "1", 10);
+        const sortParam = searchParams.get("sort") as SortType || "";
 
         setCurrentPage(pageParam);
         setLoading(true);
@@ -53,11 +57,7 @@ const Products: React.FC = () => {
                 ? getProducts().then((res) => ({
                     data: res.data.filter((p: Product) => {
                         const cat = (p.category || "").toLowerCase();
-                        if (
-                            cat === "men's clothing" &&
-                            p.title.toLowerCase().includes("backpack")
-                        )
-                            return true;
+                        if (cat === "men's clothing" && p.title.toLowerCase().includes("backpack")) return true;
                         return !mainCategories.includes(cat);
                     }),
                 }))
@@ -69,13 +69,8 @@ const Products: React.FC = () => {
             .then((res) => {
                 let sortedProducts = [...res.data];
 
-                if (sortParam === "price-asc") {
-                    sortedProducts.sort((a, b) => a.price - b.price);
-                }
-
-                if (sortParam === "price-desc") {
-                    sortedProducts.sort((a, b) => b.price - a.price);
-                }
+                if (sortParam === "price-asc") sortedProducts.sort((a, b) => a.price - b.price);
+                if (sortParam === "price-desc") sortedProducts.sort((a, b) => b.price - a.price);
 
                 setProducts(sortedProducts);
             })
@@ -97,7 +92,7 @@ const Products: React.FC = () => {
     };
 
     if (loading) {
-        return <p className="text-center mt-10">Loading...</p>;
+        return <p className="text-center mt-10">{t("productPage.loading")}</p>;
     }
 
     return (
@@ -108,24 +103,8 @@ const Products: React.FC = () => {
                 </h2>
 
                 {/* SORTING ALGORITMA */}
-                <select
-                    value={searchParams.get("sort") || ""}
-                    onChange={(e) => {
-                        setSearchParams({
-                            page: "1",
-                            sort: e.target.value,
-                        });
-                    }}
-                    className="border px-4 py-2 rounded dark:bg-black dark:text-white"
-                >
-                    <option>Select To Sort</option>
-                    <option value="price-asc">
-                        Price : Low to High
-                    </option>
-                    <option value="price-desc">
-                        Price : High to Low
-                    </option>
-                </select>
+                <SortSelect searchParams={searchParams} setSearchParams={setSearchParams} />
+
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -146,9 +125,9 @@ const Products: React.FC = () => {
                             className={`
                                 
                                 px-4 py-2 border rounded  ${page === currentPage
-                                    ? "bg-blue-500 text-white dark:bg-orange-500 dark:text-black"
+                                    ? "bg-orange-500 text-white dark:bg-blue-400 dark:text-black"
                                     : "bg-white text-gray-800 dark:bg-"
-                                } hover:bg-blue-500 hover:text-white transition dark:hover:bg-orange-600`}
+                                } hover:bg-orange-600 hover:text-white transition dark:hover:bg-blue-600`}
                         >
                             {page}
                         </button>
